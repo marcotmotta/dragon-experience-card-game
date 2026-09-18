@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cw8hgwp0seue1"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_p3jdy"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_wbiof"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_vke8t"]
+[ext_resource type="Script" uid="uid://bydsyxxm5i18a" path="res://effects/draw_cards.gd" id="4_dwaix"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_ch5l4"]
+
+[sub_resource type="Resource" id="Resource_e6g5k"]
+script = ExtResource("5_ch5l4")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_wbiof"]
+script = ExtResource("4_dwaix")
+target_selector = SubResource("Resource_e6g5k")
+metadata/_custom_type_script = "uid://bydsyxxm5i18a"
+
+[sub_resource type="Resource" id="Resource_vke8t"]
+script = ExtResource("2_wbiof")
+trigger_type = 1
+effects = Array[ExtResource("3_vke8t")]([SubResource("Resource_wbiof")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_p3jdy")
+name = "Mummy"
+type = "minion"
+minion_type = "Undead"
+rarity = "common"
+cost = 3
+description = "On Death: Draw 1 card."
+attack = 3
+health = 2
+triggered_effects = Array[ExtResource("2_wbiof")]([SubResource("Resource_vke8t")])
+art = "res://assets/minion_mummy.png"

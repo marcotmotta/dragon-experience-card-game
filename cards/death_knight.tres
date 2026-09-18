@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://y8lmdnw4gobx"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_351iu"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_qt6q1"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_yab0r"]
+[ext_resource type="Script" uid="uid://pl65ussys7p4" path="res://effects/give_property.gd" id="4_wyakn"]
+[ext_resource type="Script" uid="uid://odbgxfoby0hg" path="res://effects/helpers/self_target_selector.gd" id="5_wyakn"]
+
+[sub_resource type="Resource" id="Resource_wyakn"]
+script = ExtResource("5_wyakn")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_yab0r"]
+script = ExtResource("4_wyakn")
+given_property = "Protection"
+target_selector = SubResource("Resource_wyakn")
+metadata/_custom_type_script = "uid://pl65ussys7p4"
+
+[sub_resource type="Resource" id="Resource_qsq76"]
+script = ExtResource("2_qt6q1")
+trigger_type = 2
+effects = Array[ExtResource("3_yab0r")]([SubResource("Resource_yab0r")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_351iu")
+name = "Death Knight"
+type = "minion"
+minion_type = "Undead"
+rarity = "common"
+cost = 6
+description = "Protection"
+attack = 6
+health = 5
+triggered_effects = Array[ExtResource("2_qt6q1")]([SubResource("Resource_qsq76")])
+art = "res://assets/minion_death_knight.png"

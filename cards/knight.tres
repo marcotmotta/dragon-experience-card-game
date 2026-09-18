@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c16igel10mq1x"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_1doqb"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_u3368"]
+
+[resource]
+script = ExtResource("1_1doqb")
+name = "Knight"
+type = "minion"
+rarity = "common"
+cost = 2
+attack = 2
+health = 3
+art = "res://assets/minion_knight.png"

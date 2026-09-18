@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c5ooukm846kkm"]
+
+[ext_resource type="Texture2D" uid="uid://b7w0ow81sjou1" path="res://assets/icon_protection.png" id="1_37fg5"]
+
+[node name="PropertyIcon" type="Control" unique_id=1429648040]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PropertyIcon" type="Sprite2D" parent="." unique_id=1412322256]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_37fg5")

@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://yu6hr6octbvo"]
+
+[ext_resource type="Script" uid="uid://hnn0l6dq0eg4" path="res://cards/CardInterface/card_interface.gd" id="1_cvsbi"]
+[ext_resource type="Texture2D" uid="uid://5qk07gqrd12e" path="res://assets/card_outline.png" id="2_do5ra"]
+[ext_resource type="Texture2D" uid="uid://cnlpj1rm8ciaq" path="res://assets/card_bronze.png" id="3_do5ra"]
+[ext_resource type="Texture2D" uid="uid://bnagrjqvxnfhv" path="res://assets/card_back.png" id="4_85rju"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_85rju"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_do5ra"]
+font_size = 45
+outline_size = 10
+outline_color = Color(0, 0, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ubsfs"]
+font_size = 45
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ts7i5"]
+font_size = 45
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t45bj"]
+font_size = 18
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_onoj1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvsbi"]
+size = Vector2(240, 388)
+
+[node name="CardInterface" type="Area2D" unique_id=599086336 groups=["card"]]
+script = ExtResource("1_cvsbi")
+
+[node name="UI" type="Control" parent="." unique_id=1056136867 groups=["card"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Outline" type="Sprite2D" parent="UI" unique_id=330309106]
+visible = false
+position = Vector2(7.033348e-06, -8.34465e-06)
+scale = Vector2(2, 2)
+texture = ExtResource("2_do5ra")
+
+[node name="CardArt" type="Sprite2D" parent="UI" unique_id=855808226]
+position = Vector2(0, -36)
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="UI" unique_id=1057167588]
+scale = Vector2(2, 2)
+texture = ExtResource("3_do5ra")
+
+[node name="CardName" type="Label" parent="UI" unique_id=391914298]
+layout_mode = 0
+offset_left = -200.0
+offset_top = -163.0
+offset_right = 200.0
+offset_bottom = -135.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "CARD NAME "
+label_settings = SubResource("LabelSettings_85rju")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="UI" unique_id=862348980]
+layout_mode = 0
+offset_left = -122.0
+offset_top = -208.0
+offset_right = -71.0
+offset_bottom = -145.0
+text = "10"
+label_settings = SubResource("LabelSettings_do5ra")
+horizontal_alignment = 1
+
+[node name="Attack" type="Label" parent="UI" unique_id=514200973]
+layout_mode = 0
+offset_left = -122.0
+offset_top = 140.0
+offset_right = -71.0
+offset_bottom = 203.0
+text = "10"
+label_settings = SubResource("LabelSettings_ubsfs")
+horizontal_alignment = 1
+
+[node name="Health" type="Label" parent="UI" unique_id=1588570583]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 143.0
+offset_right = 118.0
+offset_bottom = 206.0
+text = "10"
+label_settings = SubResource("LabelSettings_ts7i5")
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI" unique_id=1843140780]
+layout_mode = 0
+offset_left = -107.0
+offset_top = 80.0
+offset_right = 108.0
+offset_bottom = 160.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "essa carta tem um efeito esparrado que se pa nem cabe aqui."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MinionType" type="Label" parent="UI" unique_id=1010317742]
+layout_mode = 0
+offset_left = -104.0
+offset_top = 161.0
+offset_right = 104.0
+offset_bottom = 189.0
+text = "Undead"
+label_settings = SubResource("LabelSettings_t45bj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1501705782]
+z_index = 10
+width_curve = SubResource("Curve_onoj1")
+
+[node name="CardBack" type="Control" parent="." unique_id=1887608351]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CardBack" unique_id=1487692815]
+scale = Vector2(2, 2)
+texture = ExtResource("4_85rju")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1868807544]
+visible = false
+shape = SubResource("RectangleShape2D_cvsbi")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

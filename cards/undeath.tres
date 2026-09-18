@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dyxqpdm8xcteb"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_p5yni"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_kgvnt"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_a7xxg"]
+[ext_resource type="Script" uid="uid://db0bm7f1kwscm" path="res://effects/summon_minion.gd" id="4_kgvnt"]
+[ext_resource type="Script" uid="uid://qxquggib3i3v" path="res://effects/give_effect.gd" id="5_a7xxg"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_qq75e"]
+[ext_resource type="Script" uid="uid://bwe401orbab24" path="res://effects/helpers/all_ally_minions_selector.gd" id="7_ronx0"]
+
+[sub_resource type="Resource" id="Resource_5vyxe"]
+script = ExtResource("5_qq75e")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_kgvnt"]
+script = ExtResource("4_kgvnt")
+minion_type = "Zombie"
+target_selector = SubResource("Resource_5vyxe")
+metadata/_custom_type_script = "uid://db0bm7f1kwscm"
+
+[sub_resource type="Resource" id="Resource_a7xxg"]
+script = ExtResource("2_kgvnt")
+trigger_type = 1
+effects = Array[ExtResource("3_a7xxg")]([SubResource("Resource_kgvnt")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[sub_resource type="Resource" id="Resource_y83a2"]
+script = ExtResource("7_ronx0")
+conditional_target_type = "Undead"
+metadata/_custom_type_script = "uid://bwe401orbab24"
+
+[sub_resource type="Resource" id="Resource_lbeiu"]
+script = ExtResource("5_a7xxg")
+given_effect = SubResource("Resource_a7xxg")
+target_selector = SubResource("Resource_y83a2")
+metadata/_custom_type_script = "uid://qxquggib3i3v"
+
+[sub_resource type="Resource" id="Resource_sbov3"]
+script = ExtResource("2_kgvnt")
+effects = Array[ExtResource("3_a7xxg")]([SubResource("Resource_lbeiu")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_p5yni")
+name = "Undeath"
+type = "spell"
+rarity = "uncommon"
+cost = 3
+description = "Give your undead minions: 'On Death: Summon a 3/2 Zombie'."
+triggered_effects = Array[ExtResource("2_kgvnt")]([SubResource("Resource_sbov3")])
+art = "res://assets/art_undeath.png"

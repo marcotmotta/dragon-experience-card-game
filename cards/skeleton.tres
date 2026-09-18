@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bpwcxtvmdw4re"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="2_2ufxe"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_jhnm4"]
+
+[resource]
+script = ExtResource("2_2ufxe")
+name = "Skeleton"
+type = "minion"
+minion_type = "Undead"
+rarity = "common"
+cost = 1
+attack = 1
+health = 2
+art = "res://assets/minion_skeleton.png"

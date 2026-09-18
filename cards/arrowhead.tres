@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bbm3vwtebhd8v"]
+
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="2_pj2bu"]
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="2_rolo8"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_t11nr"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_3d64q"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="5_moxl4"]
+
+[sub_resource type="Resource" id="Resource_nqoiu"]
+script = ExtResource("5_moxl4")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_pj2bu"]
+script = ExtResource("2_pj2bu")
+amount = 2
+target_selector = SubResource("Resource_nqoiu")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_t11nr"]
+script = ExtResource("2_t11nr")
+effects = Array[ExtResource("3_3d64q")]([SubResource("Resource_pj2bu")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("2_rolo8")
+name = "Arrowhead"
+type = "spell"
+rarity = "common"
+cost = 1
+description = "Deal 2 damage."
+requires_target = true
+triggered_effects = Array[ExtResource("2_t11nr")]([SubResource("Resource_t11nr")])
+art = "res://assets/art_arrowhead.png"

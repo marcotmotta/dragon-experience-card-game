@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c8hm2otkex7en"]
+
+[ext_resource type="Script" uid="uid://cl8l3w6jrw6lj" path="res://vfx/damage/vfx_damage.gd" id="1_n2av7"]
+
+[sub_resource type="Curve" id="Curve_4tgc7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Damage" type="CPUParticles2D" unique_id=1763277922]
+emitting = false
+amount = 16
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.9
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_4tgc7")
+color = Color(1, 0.14999998, 0, 1)
+script = ExtResource("1_n2av7")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,0 +1,439 @@
+[gd_scene format=3 uid="uid://42lwkuagbsqw"]
+
+[ext_resource type="Script" uid="uid://cybkybtxuu6dj" path="res://game_controller.gd" id="1_hdcam"]
+[ext_resource type="Script" uid="uid://bncyw0tiydib0" path="res://player_controller.gd" id="2_r0du0"]
+[ext_resource type="Script" uid="uid://dm7dqtfhlkrfc" path="res://cpu_controller.gd" id="3_r0du0"]
+[ext_resource type="Script" uid="uid://ciuhyclldvoaf" path="res://slot.gd" id="5_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://dyp0xklqv0cl" path="res://Char.tscn" id="5_fos0i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_trn2v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r0du0"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_lgr22"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_03owx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3dxm6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cm0pq"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_fos0i"]
+font_size = 30
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D" unique_id=1133419884]
+script = ExtResource("1_hdcam")
+
+[node name="Player" type="Node" parent="." unique_id=1603046863]
+script = ExtResource("2_r0du0")
+
+[node name="Player2" type="Node" parent="." unique_id=380903173]
+script = ExtResource("3_r0du0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1493035336]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.26, 0.18200001, 0.065, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=682193622]
+offset_left = 30.0
+offset_top = 180.0
+offset_right = 1250.0
+offset_bottom = 350.0
+color = Color(0.42295858, 0.30422354, 0.13254094, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=679452720]
+offset_left = 30.0
+offset_top = 370.0
+offset_right = 1250.0
+offset_bottom = 540.0
+color = Color(0.42295858, 0.30422354, 0.13254094, 1)
+
+[node name="CurrentTurn" type="Label" parent="." unique_id=2014769669]
+offset_left = 6.0
+offset_top = 306.0
+offset_right = 107.0
+offset_bottom = 329.0
+text = "Current Turn"
+
+[node name="Selected" type="Label" parent="." unique_id=1828589407]
+offset_left = 6.0
+offset_top = 281.0
+offset_right = 46.0
+offset_bottom = 304.0
+text = "SELECTED MINION"
+
+[node name="CPUHandCount" type="Label" parent="." unique_id=1229175801]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 188.0
+offset_bottom = 52.0
+text = "Hand: 7/7"
+label_settings = SubResource("LabelSettings_trn2v")
+vertical_alignment = 1
+
+[node name="CPUMana" type="Label" parent="." unique_id=2007737726]
+offset_left = 1092.0
+offset_top = 8.0
+offset_right = 1270.0
+offset_bottom = 50.0
+text = "Mana: 10/10"
+label_settings = SubResource("LabelSettings_r0du0")
+
+[node name="CPUDeckCount" type="Label" parent="." unique_id=838411096]
+offset_left = 1092.0
+offset_top = 47.0
+offset_right = 1270.0
+offset_bottom = 89.0
+text = "Deck: 30"
+label_settings = SubResource("LabelSettings_lgr22")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PlayerHandCount" type="Label" parent="." unique_id=911482255]
+offset_left = 11.0
+offset_top = 669.0
+offset_right = 189.0
+offset_bottom = 711.0
+text = "Hand: 7/7"
+label_settings = SubResource("LabelSettings_03owx")
+vertical_alignment = 1
+
+[node name="PlayerDeckCount" type="Label" parent="." unique_id=1764278857]
+offset_left = 1093.0
+offset_top = 634.0
+offset_right = 1271.0
+offset_bottom = 676.0
+text = "Deck: 30"
+label_settings = SubResource("LabelSettings_3dxm6")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PlayerMana" type="Label" parent="." unique_id=1473451269]
+offset_left = 1095.0
+offset_top = 670.0
+offset_right = 1273.0
+offset_bottom = 712.0
+text = "Mana: 10/10"
+label_settings = SubResource("LabelSettings_cm0pq")
+
+[node name="Board" type="VBoxContainer" parent="." unique_id=124345729]
+offset_right = 1280.0
+offset_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="CPUHand" type="HBoxContainer" parent="Board" unique_id=1673776613]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 122
+
+[node name="Pos1" type="Control" parent="Board/CPUHand" unique_id=1835817322]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos2" type="Control" parent="Board/CPUHand" unique_id=952669713]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos3" type="Control" parent="Board/CPUHand" unique_id=677954835]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos4" type="Control" parent="Board/CPUHand" unique_id=894935026]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos5" type="Control" parent="Board/CPUHand" unique_id=1390248332]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos6" type="Control" parent="Board/CPUHand" unique_id=293321548]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos7" type="Control" parent="Board/CPUHand" unique_id=1985539927]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="CPUChar" type="Control" parent="Board" unique_id=1784477740]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Char" parent="Board/CPUChar" unique_id=969709964 instance=ExtResource("5_fos0i")]
+position = Vector2(0, 70)
+
+[node name="CPUBoard" type="HBoxContainer" parent="Board" unique_id=2093152194]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 160
+alignment = 1
+
+[node name="Pos1" type="Control" parent="Board/CPUBoard" unique_id=1705263430]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos2" type="Control" parent="Board/CPUBoard" unique_id=378171839]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos3" type="Control" parent="Board/CPUBoard" unique_id=1464473108]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos4" type="Control" parent="Board/CPUBoard" unique_id=1284504490]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos5" type="Control" parent="Board/CPUBoard" unique_id=686753902]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos6" type="Control" parent="Board/CPUBoard" unique_id=1149436622]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos7" type="Control" parent="Board/CPUBoard" unique_id=1160623650]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="PlayingSlot" type="Control" parent="Board" unique_id=1894067898]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="PlayerBoard" type="HBoxContainer" parent="Board" unique_id=1696706534]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 160
+alignment = 1
+
+[node name="Pos1" type="Control" parent="Board/PlayerBoard" unique_id=743185725]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos2" type="Control" parent="Board/PlayerBoard" unique_id=1791149438]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos3" type="Control" parent="Board/PlayerBoard" unique_id=2012918321]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos4" type="Control" parent="Board/PlayerBoard" unique_id=965221492]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos5" type="Control" parent="Board/PlayerBoard" unique_id=1570306524]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos6" type="Control" parent="Board/PlayerBoard" unique_id=1414020598]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Pos7" type="Control" parent="Board/PlayerBoard" unique_id=1332612244]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="PlayerChar" type="Control" parent="Board" unique_id=96844029]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Char" parent="Board/PlayerChar" unique_id=1270307953 instance=ExtResource("5_fos0i")]
+position = Vector2(0, -70)
+
+[node name="PlayerHand" type="HBoxContainer" parent="Board" unique_id=5903183]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 122
+
+[node name="Pos1" type="Control" parent="Board/PlayerHand" unique_id=665450924]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos2" type="Control" parent="Board/PlayerHand" unique_id=416877488]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos3" type="Control" parent="Board/PlayerHand" unique_id=1656357439]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos4" type="Control" parent="Board/PlayerHand" unique_id=236790511]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos5" type="Control" parent="Board/PlayerHand" unique_id=471715714]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos6" type="Control" parent="Board/PlayerHand" unique_id=1979922044]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="Pos7" type="Control" parent="Board/PlayerHand" unique_id=1060212587]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("5_3dxm6")
+
+[node name="EndTurnButton" type="Button" parent="." unique_id=1602023882]
+offset_left = 1149.0
+offset_top = 334.0
+offset_right = 1249.0
+offset_bottom = 384.0
+disabled = true
+text = "END TURN"
+
+[node name="EndGameUI" type="CanvasLayer" parent="." unique_id=1241565486]
+process_mode = 3
+visible = false
+
+[node name="Control" type="Control" parent="EndGameUI" unique_id=2004258401]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="EndGameUI/Control" unique_id=275053473]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="WinLabel" type="Label" parent="EndGameUI/Control" unique_id=1170694878]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.5
+offset_top = -110.0
+offset_right = 112.5
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAYER 1 WON!"
+label_settings = SubResource("LabelSettings_fos0i")
+
+[node name="MainMenu" type="Button" parent="EndGameUI/Control" unique_id=665348338]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -30.0
+offset_right = 50.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "MAIN MENU"
+
+[node name="MenuUI" type="CanvasLayer" parent="." unique_id=1077076534]
+process_mode = 3
+visible = false
+
+[node name="Control" type="Control" parent="MenuUI" unique_id=1704550603]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MenuUI/Control" unique_id=1312130201]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="Resume" type="Button" parent="MenuUI/Control" unique_id=19301190]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -30.0
+offset_right = 52.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "RESUME"
+
+[node name="MainMenu" type="Button" parent="MenuUI/Control" unique_id=802642554]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = 40.0
+offset_right = 52.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "MAIN MENU"
+
+[connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="EndGameUI/Control/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MenuUI/Control/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MenuUI/Control/MainMenu" to="." method="_on_main_menu_pressed"]

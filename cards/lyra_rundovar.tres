@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bto82r4cp7qap"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_c3ki1"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_tfcbf"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_vncmv"]
+[ext_resource type="Script" uid="uid://db0bm7f1kwscm" path="res://effects/summon_minion.gd" id="4_3w0pu"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_vac2q"]
+
+[sub_resource type="Resource" id="Resource_c3ki1"]
+script = ExtResource("5_vac2q")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_tfcbf"]
+script = ExtResource("4_3w0pu")
+minion_type = "Skeleton"
+target_selector = SubResource("Resource_c3ki1")
+metadata/_custom_type_script = "uid://db0bm7f1kwscm"
+
+[sub_resource type="Resource" id="Resource_m06vt"]
+script = ExtResource("2_tfcbf")
+trigger_type = 5
+effects = Array[ExtResource("3_vncmv")]([SubResource("Resource_tfcbf")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_c3ki1")
+name = "Lyra Rundovar"
+type = "minion"
+minion_type = "Undead"
+rarity = "legendary"
+cost = 6
+description = "End of Turn: Summon a 1/2 'Skeleton'."
+attack = 4
+health = 5
+triggered_effects = Array[ExtResource("2_tfcbf")]([SubResource("Resource_m06vt")])
+art = "res://assets/minion_lyra_rundovar.png"

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cpx2hcykwsjiv"]
+
+[ext_resource type="Script" uid="uid://6cs86ga4fs2j" path="res://main_menu.gd" id="1_i26rj"]
+
+[node name="MainMenu" type="Node2D" unique_id=662596756]
+script = ExtResource("1_i26rj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=338086139]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 490.0
+offset_top = 360.0
+offset_right = 790.0
+offset_bottom = 426.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Play" type="Button" parent="VBoxContainer" unique_id=851438560]
+layout_mode = 2
+text = "PLAY"
+
+[node name="Collection" type="Button" parent="VBoxContainer" unique_id=32268843]
+layout_mode = 2
+text = "COLLECTION"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Collection" to="." method="_on_collection_pressed"]

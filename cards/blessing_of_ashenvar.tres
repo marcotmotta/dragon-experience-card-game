@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bglf24sj853gi"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_ro5vw"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_p33yl"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_nu1f6"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="4_fvxeu"]
+[ext_resource type="Script" uid="uid://bwe401orbab24" path="res://effects/helpers/all_ally_minions_selector.gd" id="5_stlwm"]
+
+[sub_resource type="Resource" id="Resource_oei4v"]
+script = ExtResource("5_stlwm")
+conditional_target_type = "Elf"
+metadata/_custom_type_script = "uid://bwe401orbab24"
+
+[sub_resource type="Resource" id="Resource_3dklb"]
+script = ExtResource("4_fvxeu")
+attack_amount = 1
+health_amount = 1
+target_selector = SubResource("Resource_oei4v")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_sbov3"]
+script = ExtResource("2_p33yl")
+effects = Array[ExtResource("3_nu1f6")]([SubResource("Resource_3dklb")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_ro5vw")
+name = "Blessing of Ashenvar"
+type = "spell"
+rarity = "uncommon"
+cost = 2
+description = "Give your elves +1/+1."
+triggered_effects = Array[ExtResource("2_p33yl")]([SubResource("Resource_sbov3")])
+art = "res://assets/art_blessing_of_ashenvar.png"

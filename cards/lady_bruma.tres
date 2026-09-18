@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cmkuoltwos5xk"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_3vu7j"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_o4ba8"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_sajlp"]
+[ext_resource type="Script" uid="uid://db0bm7f1kwscm" path="res://effects/summon_minion.gd" id="4_3vu7j"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_o4ba8"]
+
+[sub_resource type="Resource" id="Resource_sajlp"]
+script = ExtResource("5_o4ba8")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_xaufv"]
+script = ExtResource("4_3vu7j")
+minion_type = "Eluin Ranger"
+target_selector = SubResource("Resource_sajlp")
+metadata/_custom_type_script = "uid://db0bm7f1kwscm"
+
+[sub_resource type="Resource" id="Resource_3vu7j"]
+script = ExtResource("5_o4ba8")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_o4ba8"]
+script = ExtResource("4_3vu7j")
+minion_type = "Eluin Ranger"
+target_selector = SubResource("Resource_3vu7j")
+metadata/_custom_type_script = "uid://db0bm7f1kwscm"
+
+[sub_resource type="Resource" id="Resource_0it1a"]
+script = ExtResource("2_o4ba8")
+effects = Array[ExtResource("3_sajlp")]([SubResource("Resource_xaufv"), SubResource("Resource_o4ba8")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_3vu7j")
+name = "Lady Bruma"
+type = "minion"
+minion_type = "Elf"
+rarity = "legendary"
+cost = 7
+description = "On Play: Summon two 2/1 'Eluin Rangers'."
+attack = 7
+health = 7
+triggered_effects = Array[ExtResource("2_o4ba8")]([SubResource("Resource_0it1a")])
+art = "res://assets/minion_lady_bruma.png"

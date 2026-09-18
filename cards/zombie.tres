@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bx0d3nfsm5cf1"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_h0vne"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_78n3w"]
+
+[resource]
+script = ExtResource("1_h0vne")
+name = "Zombie"
+type = "minion"
+minion_type = "Undead"
+rarity = "common"
+cost = 2
+attack = 3
+health = 2
+art = "res://assets/minion_zombie.png"

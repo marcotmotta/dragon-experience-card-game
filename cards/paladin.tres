@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cqkt7j1wv3mxj"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_napwy"]
+[ext_resource type="Script" uid="uid://wcjniw2waj4e" path="res://effects/heal_target.gd" id="2_b7cuq"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_eiehf"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_qqs67"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="5_i1iy8"]
+
+[sub_resource type="Resource" id="Resource_3xres"]
+script = ExtResource("5_i1iy8")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_gixmm"]
+script = ExtResource("2_b7cuq")
+amount = 2
+target_selector = SubResource("Resource_3xres")
+metadata/_custom_type_script = "uid://wcjniw2waj4e"
+
+[sub_resource type="Resource" id="Resource_eiehf"]
+script = ExtResource("2_eiehf")
+effects = Array[ExtResource("3_qqs67")]([SubResource("Resource_gixmm")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_napwy")
+name = "Paladin"
+type = "minion"
+rarity = "common"
+cost = 3
+description = "On Play: Heal 2."
+requires_target = true
+attack = 3
+health = 3
+triggered_effects = Array[ExtResource("2_eiehf")]([SubResource("Resource_eiehf")])
+art = "res://assets/minion_paladin.png"

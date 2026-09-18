@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dkq0lmkigqpu1"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_nmir2"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_8j2me"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_llamk"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="4_nmir2"]
+[ext_resource type="Script" uid="uid://bwe401orbab24" path="res://effects/helpers/all_ally_minions_selector.gd" id="5_8j2me"]
+
+[sub_resource type="Resource" id="Resource_llamk"]
+script = ExtResource("5_8j2me")
+metadata/_custom_type_script = "uid://bwe401orbab24"
+
+[sub_resource type="Resource" id="Resource_hgpvh"]
+script = ExtResource("4_nmir2")
+health_amount = 2
+target_selector = SubResource("Resource_llamk")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_m06vt"]
+script = ExtResource("2_8j2me")
+trigger_type = 5
+effects = Array[ExtResource("3_llamk")]([SubResource("Resource_hgpvh")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_nmir2")
+name = "Coridravàl, the Magnificent"
+type = "minion"
+minion_type = "Dragon"
+rarity = "legendary"
+cost = 10
+description = "End of Turn: Give your minions +2 health."
+attack = 10
+health = 10
+triggered_effects = Array[ExtResource("2_8j2me")]([SubResource("Resource_m06vt")])
+art = "res://assets/minion_coridraval.png"

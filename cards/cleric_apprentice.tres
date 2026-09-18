@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://6wxjahvtkqey"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_l02yt"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_h03jo"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_h03jo"]
+[ext_resource type="Script" uid="uid://vvw6y54vsmbk" path="res://effects/silence.gd" id="4_a630u"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="5_jmejh"]
+
+[sub_resource type="Resource" id="Resource_o81u4"]
+script = ExtResource("5_jmejh")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_qcq0y"]
+script = ExtResource("4_a630u")
+target_selector = SubResource("Resource_o81u4")
+metadata/_custom_type_script = "uid://vvw6y54vsmbk"
+
+[sub_resource type="Resource" id="Resource_l5rcl"]
+script = ExtResource("2_h03jo")
+effects = Array[ExtResource("3_h03jo")]([SubResource("Resource_qcq0y")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_l02yt")
+name = "Cleric Apprentice"
+type = "minion"
+rarity = "common"
+cost = 2
+description = "On Play: Silence a minion."
+requires_target = true
+attack = 1
+health = 2
+triggered_effects = Array[ExtResource("2_h03jo")]([SubResource("Resource_l5rcl")])
+art = "res://assets/minion_cleric_apprentice.png"

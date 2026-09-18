@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dq511mvbnn0kc"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_0m0w7"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_ycfj1"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_doexw"]
+[ext_resource type="Script" uid="uid://pl65ussys7p4" path="res://effects/give_property.gd" id="4_y7n08"]
+[ext_resource type="Script" uid="uid://odbgxfoby0hg" path="res://effects/helpers/self_target_selector.gd" id="5_nnmyd"]
+
+[sub_resource type="Resource" id="Resource_wyakn"]
+script = ExtResource("5_nnmyd")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_yab0r"]
+script = ExtResource("4_y7n08")
+given_property = "Protection"
+target_selector = SubResource("Resource_wyakn")
+metadata/_custom_type_script = "uid://pl65ussys7p4"
+
+[sub_resource type="Resource" id="Resource_qsq76"]
+script = ExtResource("2_ycfj1")
+trigger_type = 2
+effects = Array[ExtResource("3_doexw")]([SubResource("Resource_yab0r")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_0m0w7")
+name = "Rebellion Soldier"
+type = "minion"
+minion_type = "Dwarf"
+rarity = "common"
+cost = 4
+description = "Protection"
+attack = 3
+health = 5
+triggered_effects = Array[ExtResource("2_ycfj1")]([SubResource("Resource_qsq76")])
+art = "res://assets/minion_rebellion_soldier.png"

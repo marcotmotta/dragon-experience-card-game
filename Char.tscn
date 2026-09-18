@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dyp0xklqv0cl"]
+
+[ext_resource type="Script" uid="uid://b6e4yefo8xxwr" path="res://char.gd" id="1_8q27n"]
+[ext_resource type="Texture2D" uid="uid://c1yamtlv5hsnk" path="res://icon.svg" id="1_20esp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fos0i"]
+font_size = 50
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm0pq"]
+size = Vector2(126.66666, 126.66666)
+
+[node name="Char" type="Area2D" unique_id=969709964 groups=["char"]]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_8q27n")
+
+[node name="Char" type="Sprite2D" parent="." unique_id=2003499965]
+texture = ExtResource("1_20esp")
+
+[node name="Health" type="Label" parent="." unique_id=1614978548]
+offset_left = -61.666626
+offset_top = 26.666687
+offset_right = 63.333374
+offset_bottom = 96.66669
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "00"
+label_settings = SubResource("LabelSettings_fos0i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2072244617]
+visible = false
+shape = SubResource("RectangleShape2D_cm0pq")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

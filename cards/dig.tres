@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b04eyj8aqi67e"]
+
+[ext_resource type="Script" uid="uid://bydsyxxm5i18a" path="res://effects/draw_cards.gd" id="2_2i2wi"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_r6b4x"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_jt6hs"]
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="3_r6b4x"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_pmai5"]
+
+[sub_resource type="Resource" id="Resource_rrmb1"]
+script = ExtResource("5_pmai5")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_lf1i7"]
+script = ExtResource("2_2i2wi")
+amount = 2
+target_selector = SubResource("Resource_rrmb1")
+metadata/_custom_type_script = "uid://bydsyxxm5i18a"
+
+[sub_resource type="Resource" id="Resource_r6b4x"]
+script = ExtResource("2_r6b4x")
+effects = Array[ExtResource("3_jt6hs")]([SubResource("Resource_lf1i7")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("3_r6b4x")
+name = "Dig"
+type = "spell"
+rarity = "common"
+cost = 3
+description = "Draw 2 cards."
+triggered_effects = Array[ExtResource("2_r6b4x")]([SubResource("Resource_r6b4x")])
+art = "res://assets/art_dig.png"

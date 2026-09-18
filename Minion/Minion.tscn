@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://cvmcu5qfjw3f5"]
+
+[ext_resource type="Texture2D" uid="uid://c1yamtlv5hsnk" path="res://icon.svg" id="1_j1yq0"]
+[ext_resource type="Script" uid="uid://dot053d0v6gfx" path="res://Minion/Minion.gd" id="1_xkbak"]
+[ext_resource type="Texture2D" uid="uid://t6gapq5k25uo" path="res://assets/minion_zombie.png" id="3_eui0b"]
+[ext_resource type="PackedScene" uid="uid://c8hm2otkex7en" path="res://vfx/damage/damage.tscn" id="3_pxngv"]
+[ext_resource type="Texture2D" uid="uid://cylabtproduga" path="res://assets/attack_icon.png" id="4_kwss7"]
+[ext_resource type="Texture2D" uid="uid://c5p4dkqkinrft" path="res://assets/death_icon.png" id="4_ncqbn"]
+[ext_resource type="Texture2D" uid="uid://bs2qle0rhrc6c" path="res://assets/effect_icon.png" id="5_mbwdj"]
+[ext_resource type="Texture2D" uid="uid://ccw0vyl8xpmgl" path="res://assets/icon_silence.png" id="6_o8jr0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eui0b"]
+font_size = 12
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hibgt"]
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kwss7"]
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_0swjs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kv6k"]
+size = Vector2(126, 90)
+
+[node name="Minion" type="Area2D" unique_id=506011199 groups=["minion"]]
+script = ExtResource("1_xkbak")
+
+[node name="Outline" type="Sprite2D" parent="." unique_id=768910256]
+visible = false
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-3.5464764e-06, -0.50000095)
+scale = Vector2(1.078125, 0.7890625)
+texture = ExtResource("1_j1yq0")
+
+[node name="MinionArt" type="Sprite2D" parent="." unique_id=1037136466]
+texture = ExtResource("3_eui0b")
+
+[node name="OnDeathIcon" type="Sprite2D" parent="." unique_id=795831954]
+visible = false
+position = Vector2(0, 45)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_ncqbn")
+
+[node name="EffectIcon" type="Sprite2D" parent="." unique_id=1757454415]
+visible = false
+position = Vector2(0, 45)
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("5_mbwdj")
+
+[node name="SilenceIcon" type="Sprite2D" parent="." unique_id=278337235]
+visible = false
+position = Vector2(0, 45)
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("6_o8jr0")
+
+[node name="AttackedLabel" type="Sprite2D" parent="." unique_id=1070390850]
+position = Vector2(62, -15)
+texture = ExtResource("4_kwss7")
+
+[node name="Properties" type="VBoxContainer" parent="." unique_id=685157103]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -15.0
+offset_right = -62.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_vertical = 4
+theme_override_constants/separation = 26
+
+[node name="MinionName" type="Label" parent="." unique_id=1061673656]
+offset_left = -200.0
+offset_top = -57.0
+offset_right = 200.0
+offset_bottom = -39.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "CARD NAME"
+label_settings = SubResource("LabelSettings_eui0b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Attack" type="Label" parent="." unique_id=2117839111]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = 20.0
+offset_right = -25.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "00"
+label_settings = SubResource("LabelSettings_hibgt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health" type="Label" parent="." unique_id=1547786638]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 26.0
+offset_top = 20.0
+offset_right = 76.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "00"
+label_settings = SubResource("LabelSettings_kwss7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line2D" type="Line2D" parent="." unique_id=333916729]
+z_index = 10
+width_curve = SubResource("Curve_0swjs")
+
+[node name="Damage" parent="." unique_id=1763277922 instance=ExtResource("3_pxngv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1836576460]
+visible = false
+shape = SubResource("RectangleShape2D_0kv6k")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
