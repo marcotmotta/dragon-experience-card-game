@@ -1,19 +1,13 @@
 extends Node
 
+# game_controller.Seat
+var seat : int
+
 var main_scene
 var cpu_hand
 var cpu_board
 var player_board
 var player_char
-
-enum TriggerType {
-	ON_PLAY, # for spells
-	ON_DEATH,
-	ON_SUMMON,
-	ON_ATTACK,
-	ON_TURN_START,
-	ON_TURN_END
-}
 
 var deck
 
@@ -47,7 +41,7 @@ func draw_card_from_deck():
 
 	var card_name = deck.pick_random()
 
-	if main_scene.create_card(main_scene.players.CPU, card_name):
+	if main_scene.create_card(seat, card_name):
 		deck.erase(card_name)
 		print('CPU drew a card!')
 		return true
@@ -75,7 +69,7 @@ func iterate_available_actions():
 						if card.cost <= current_mana:
 							# has mana!
 							# validate effects
-							var triggers = card.triggered_effects.filter(func(trigger): return trigger.trigger_type == TriggerType.ON_PLAY)
+							var triggers = card.triggered_effects.filter(func(trigger): return trigger.trigger_type == TriggeredEffect.TriggerType.ON_PLAY)
 							if not triggers:
 								print('cpu playing card - minion.')
 								card.play_card()
@@ -106,7 +100,7 @@ func iterate_available_actions():
 				if card.cost <= current_mana:
 					# has mana!
 					for trigger in card.triggered_effects:
-						if trigger.trigger_type == TriggerType.ON_PLAY:
+						if trigger.trigger_type == TriggeredEffect.TriggerType.ON_PLAY:
 							for effect in trigger.effects:
 								var ally_char = main_scene.get_node('Board/CPUChar/Char')
 								var enemy_char = main_scene.get_node('Board/PlayerChar/Char')
@@ -133,7 +127,7 @@ func iterate_available_actions():
 			var ally_minion = pos.get_child(0)
 
 			# check enemy_health. if lethal, attack face.
-			if (main_scene.player1_state.current_health - ally_minion.current_attack) <= 0:
+			if (main_scene.player_state[main_scene.Seat.P1].current_health - ally_minion.current_attack) <= 0:
 				# has lethal! win the game
 				ally_minion.attack(player_char)
 				return true

@@ -21,15 +21,6 @@ var is_dead = false
 var main_scene
 
 # effects
-enum TriggerType {
-	ON_PLAY, # for spells
-	ON_DEATH,
-	ON_SUMMON,
-	ON_ATTACK,
-	ON_TURN_START,
-	ON_TURN_END
-}
-
 var triggered_effects = []
 
 # properties
@@ -55,9 +46,6 @@ var art
 @onready var heal_sound = load("res://sound/heal.wav")
 
 func _ready():
-	# TODO: fix this
-	main_scene = get_parent().get_parent().get_parent().get_parent()
-
 	# set values
 	max_attack = BASE_ATTACK
 	max_health = BASE_HEALTH
@@ -77,12 +65,12 @@ func _ready():
 
 	# trigger on summon effects
 	for trigger in triggered_effects:
-		if trigger.trigger_type == TriggerType.ON_SUMMON:
+		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_SUMMON:
 			for effect in trigger.effects:
-				var board1 = main_scene.get_node('Board/PlayerBoard') if owner_node.name == 'Player' else main_scene.get_node('Board/CPUBoard')
-				var board2 = main_scene.get_node('Board/PlayerBoard') if not owner_node.name == 'Player' else main_scene.get_node('Board/CPUBoard')
-				var char1 = main_scene.get_node('Board/PlayerChar/Char') if owner_node.name == 'Player' else main_scene.get_node('Board/CPUChar/Char')
-				var char2 = main_scene.get_node('Board/PlayerChar/Char') if not owner_node.name == 'Player' else main_scene.get_node('Board/CPUChar/Char')
+				var board1 = main_scene.board_of(owner_node.seat)
+				var board2 = main_scene.board_of(main_scene.opponent_of(owner_node.seat))
+				var char1 = main_scene.char_of(owner_node.seat)
+				var char2 = main_scene.char_of(main_scene.opponent_of(owner_node.seat))
 
 				var targets = effect.target_selector.get_targets(self, null, owner_node, char1, char2, board1, board2)
 
@@ -118,14 +106,14 @@ func _process(delta):
 
 	# effect icons
 	for trigger in triggered_effects:
-		if trigger.trigger_type == TriggerType.ON_DEATH:
+		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_DEATH:
 			$OnDeathIcon.visible = true
 			break
 
 	for trigger in triggered_effects:
-		if (trigger.trigger_type == TriggerType.ON_ATTACK) or \
-			(trigger.trigger_type == TriggerType.ON_TURN_START) or \
-			(trigger.trigger_type == TriggerType.ON_TURN_END):
+		if (trigger.trigger_type == TriggeredEffect.TriggerType.ON_ATTACK) or \
+			(trigger.trigger_type == TriggeredEffect.TriggerType.ON_TURN_START) or \
+			(trigger.trigger_type == TriggeredEffect.TriggerType.ON_TURN_END):
 				$EffectIcon.visible = true
 				break
 

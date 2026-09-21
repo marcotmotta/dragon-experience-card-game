@@ -19,15 +19,6 @@ var owner_node = null
 var main_scene
 
 # effects
-enum TriggerType {
-	ON_PLAY, # for spells
-	ON_DEATH,
-	ON_SUMMON,
-	ON_ATTACK,
-	ON_TURN_START,
-	ON_TURN_END
-}
-
 var triggered_effects = []
 
 # art
@@ -45,10 +36,8 @@ var valid_for_play = false
 @onready var line = $Line2D
 
 func _ready():
-	# TODO: fix this
-	main_scene = get_parent().get_parent().get_parent().get_parent()
-
-	if owner_node == main_scene.get_node('Player'):
+	# TODO(mp): trocar por 'card_owner == local_seat' quando houver perspectiva de rede
+	if card_owner == main_scene.Seat.P1:
 		$UI/CardName.text = card_name
 		$UI/Cost.text = str(cost)
 		$UI/MinionType.text = minion_type
@@ -117,7 +106,7 @@ func play_card(target = null):
 	# validate target. is any effect invalid, return.
 	for trigger in triggered_effects:
 		# just need to validate on_play effects here
-		if trigger.trigger_type == TriggerType.ON_PLAY:
+		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_PLAY:
 			for effect in trigger.effects:
 				if target:
 					# does it make sense to validate without target? not currently
@@ -131,7 +120,7 @@ func play_card(target = null):
 
 	if type == 'minion':
 		# give minion triggered effects
-		var selected_effects = triggered_effects.filter(func(triggered_effect): return triggered_effect.trigger_type != TriggerType.ON_PLAY)
+		var selected_effects = triggered_effects.filter(func(triggered_effect): return triggered_effect.trigger_type != TriggeredEffect.TriggerType.ON_PLAY)
 		# spawn minion from card. if couldnt spawn, doesnt consume the card
 		if not main_scene.spawn_minion(card_owner, card_name, selected_effects):
 			# revert card from playing slot
@@ -142,12 +131,12 @@ func play_card(target = null):
 
 	# Trigger on_play effects
 	for trigger in triggered_effects:
-		if trigger.trigger_type == TriggerType.ON_PLAY:
+		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_PLAY:
 			for effect in trigger.effects:
-				var board1 = main_scene.get_node('Board/PlayerBoard') if owner_node.name == 'Player' else main_scene.get_node('Board/CPUBoard')
-				var board2 = main_scene.get_node('Board/PlayerBoard') if not owner_node.name == 'Player' else main_scene.get_node('Board/CPUBoard')
-				var char1 = main_scene.get_node('Board/PlayerChar/Char') if owner_node.name == 'Player' else main_scene.get_node('Board/CPUChar/Char')
-				var char2 = main_scene.get_node('Board/PlayerChar/Char') if not owner_node.name == 'Player' else main_scene.get_node('Board/CPUChar/Char')
+				var board1 = main_scene.board_of(owner_node.seat)
+				var board2 = main_scene.board_of(main_scene.opponent_of(owner_node.seat))
+				var char1 = main_scene.char_of(owner_node.seat)
+				var char2 = main_scene.char_of(main_scene.opponent_of(owner_node.seat))
 
 				var targets = effect.target_selector.get_targets(self, target, owner_node, char1, char2, board1, board2)
 
@@ -183,13 +172,14 @@ func validate_self():
 		return false
 
 	# validate effects. is any affect invalid, return.
-	var board1 = main_scene.get_node('Board/PlayerBoard') if owner_node.name == 'Player' else main_scene.get_node('Board/CPUBoard')
-	var board2 = main_scene.get_node('Board/PlayerBoard') if not owner_node.name == 'Player' else main_scene.get_node('Board/CPUBoard')
-	var char1 = main_scene.get_node('Board/PlayerChar/Char') if owner_node.name == 'Player' else main_scene.get_node('Board/CPUChar/Char')
-	var char2 = main_scene.get_node('Board/PlayerChar/Char') if not owner_node.name == 'Player' else main_scene.get_node('Board/CPUChar/Char')
+	var board1 = main_scene.board_of(owner_node.seat)
+	var board2 = main_scene.board_of(main_scene.opponent_of(owner_node.seat))
+	var char1 = main_scene.char_of(owner_node.seat)
+	var char2 = main_scene.char_of(main_scene.opponent_of(owner_node.seat))
+
 	for trigger in triggered_effects:
 		# just need to validate on_play effects here
-		if trigger.trigger_type == TriggerType.ON_PLAY:
+		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_PLAY:
 			for effect in trigger.effects:
 				if not effect.validate_possible_play(owner_node, char1, char2, board1, board2)[0]:
 					#print('invalid. effect not possible to be played.')
@@ -200,7 +190,7 @@ func validate_self():
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and Input.is_action_just_pressed('mouse1'):
 		# only the player can play cards by this action
-		if card_owner != main_scene.players.PLAYER:
+		if card_owner != main_scene.Seat.P1:
 			print('only the player can play cards by mouse action.')
 			return
 
@@ -208,13 +198,13 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 
 # zoom in and out
 func _on_mouse_entered() -> void:
-	if location == 'hand' and card_owner == main_scene.players.PLAYER:
+	if location == 'hand' and card_owner == main_scene.Seat.P1:
 		$UI.scale = Vector2(2, 2)
 		$UI.position.y -= 400
 		$UI.z_index += 10
 
 func _on_mouse_exited() -> void:
-	if location == 'hand' and card_owner == main_scene.players.PLAYER:
+	if location == 'hand' and card_owner == main_scene.Seat.P1:
 		$UI.scale = Vector2(1, 1)
 		$UI.position.y += 400
 		$UI.z_index -= 10

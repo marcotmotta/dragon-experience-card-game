@@ -1,5 +1,8 @@
 extends Node
 
+# game_controller.Seat
+var seat : int
+
 var main_scene
 var player_hand
 var player_board
@@ -36,7 +39,7 @@ func draw_card_from_deck():
 
 	var card_name = deck.pick_random()
 
-	if main_scene.create_card(main_scene.players.PLAYER, card_name):
+	if main_scene.create_card(seat, card_name):
 		print('drew ', card_name)
 		deck.erase(card_name)
 		print('PLAYER drew a card!')

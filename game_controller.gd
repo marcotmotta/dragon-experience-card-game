@@ -1,9 +1,29 @@
 extends Node2D
 
-enum players {
-	PLAYER,
-	CPU
+# Seat helpers {{{
+enum Seat {
+	P1,
+	P2
 }
+
+func controller_of(seat: Seat) -> Node:
+	return $Player if seat == Seat.P1 else $Player2
+
+func board_of(seat: Seat) -> Node:
+	return $Board/PlayerBoard if seat == Seat.P1 else $Board/CPUBoard
+
+func hand_of(seat: Seat) -> Node:
+	return $Board/PlayerHand if seat == Seat.P1 else $Board/CPUHand
+
+func char_of(seat: Seat) -> Node:
+	return $Board/PlayerChar/Char if seat == Seat.P1 else $Board/CPUChar/Char
+
+func opponent_of(seat: Seat) -> Seat:
+	return Seat.P2 if seat == Seat.P1 else Seat.P1
+
+func seat_of_char(c) -> Seat:
+	return Seat.P1 if c == $Board/PlayerChar/Char else Seat.P2
+# }}}
 
 enum phases {
 	UPKEEP,
@@ -14,36 +34,17 @@ enum phases {
 
 var current_turn_state = {
 	'turn': 0,
-	'owner': players.PLAYER,
+	'owner': Seat.P1,
 	'phase': phases.UPKEEP
 }
 
-var player1_state = {
-	'health': 30,
-	'current_health': 30
-	# TODO: put mana here
+var player_state = {
+	Seat.P1: { 'health': 30, 'current_health': 30 },
+	Seat.P2: { 'health': 30, 'current_health': 30 },
 }
 
-var player2_state = {
-	'health': 30,
-	'current_health': 30
-	# TODO: put mana here
-}
-
-var slot_order_number = 0
-var p1_slot_order
-var p2_slot_order
 
 # effects
-enum TriggerType {
-	ON_PLAY, # for spells
-	ON_DEATH,
-	ON_SUMMON,
-	ON_ATTACK,
-	ON_TURN_START,
-	ON_TURN_END
-}
-
 var trigger_queue = []
 
 @onready var minion_scene = load("res://Minion/Minion.tscn")
@@ -52,22 +53,15 @@ var trigger_queue = []
 var cards
 
 func _reset_game():
+	$Player.seat = Seat.P1
+	$Player2.seat = Seat.P2
 	$Board/PlayerChar/Char.owner_node = $Player
 	$Board/CPUChar/Char.owner_node = $Player2
 	$Board/PlayerChar/Char.main_scene = self
 	$Board/CPUChar/Char.main_scene = self
 
-	# initiate slot ordering
-	for slot in $Board/PlayerHand.get_children():
-		p1_slot_order = [slot, slot_order_number]
-		slot_order_number += 1
-
-	for slot in $Board/CPUHand.get_children():
-		p2_slot_order = [slot, slot_order_number]
-		slot_order_number += 1
-
 	# choose begin play
-	current_turn_state.owner = [players.PLAYER, players.CPU].pick_random()
+	current_turn_state.owner = [Seat.P1, Seat.P2].pick_random()
 
 	# draw initial cards
 	for i in range(2):
@@ -123,15 +117,15 @@ func _process(delta):
 			cpu_hand_count += 1
 	$CPUHandCount.text = 'Hand: ' + str(cpu_hand_count) + '/7'
 
-	$Board/PlayerChar/Char.get_node("Health").text = str(player1_state.current_health)
-	$Board/CPUChar/Char.get_node("Health").text = str(player2_state.current_health)
+	char_of(Seat.P1).get_node("Health").text = str(player_state[Seat.P1].current_health)
+	char_of(Seat.P2).get_node("Health").text = str(player_state[Seat.P2].current_health)
 
 	# end game check
-	if player1_state.current_health <= 0:
-		$EndGameUI/Control/Label.text = 'Player 2 Won!'
+	if player_state[Seat.P1].current_health <= 0:
+		$EndGameUI/Control/WinLabel.text = 'Player 2 Won!'
 		end_game()
-	if player2_state.current_health <= 0:
-		$EndGameUI/Control/Label.text = 'Player 1 Won!'
+	if player_state[Seat.P2].current_health <= 0:
+		$EndGameUI/Control/WinLabel.text = 'Player 1 Won!'
 		end_game()
 
 func _go_to_next_phase():
@@ -145,13 +139,13 @@ func _set_turn_phase(new_phase):
 			clear_targeting()
 
 			# reset minion attack
-			var board_positions = ($Board/PlayerBoard if current_turn_state.owner == players.PLAYER else $Board/CPUBoard).get_children()
+			var board_positions = board_of(current_turn_state.owner).get_children()
 			for pos in board_positions:
 				if pos.get_children():
 					pos.get_child(0).attacked = false
 
 			# gain mana
-			if current_turn_state.owner == players.PLAYER:
+			if current_turn_state.owner == Seat.P1:
 				if $Player.mana < 10:
 					$Player.gain_max_mana(1)
 				$Player.refresh_mana()
@@ -167,10 +161,7 @@ func _set_turn_phase(new_phase):
 			current_turn_state.phase = phases.DRAW
 			clear_targeting()
 
-			if current_turn_state.owner == players.PLAYER:
-				$Player.draw_card_from_deck()
-			else:
-				$Player2.draw_card_from_deck()
+			controller_of(current_turn_state.owner).draw_card_from_deck()
 
 			await get_tree().create_timer(0.5).timeout
 			_go_to_next_phase()
@@ -180,7 +171,7 @@ func _set_turn_phase(new_phase):
 			clear_targeting()
 
 			# enable end turn button if its the players turn
-			if current_turn_state.owner == players.PLAYER:
+			if current_turn_state.owner == Seat.P1:
 				$EndTurnButton.disabled = false
 
 			# cpu turn:
@@ -195,16 +186,16 @@ func _set_turn_phase(new_phase):
 			clear_targeting()
 
 			# disable minion attack
-			var board_positions = ($Board/PlayerBoard if current_turn_state.owner == players.PLAYER else $Board/CPUBoard).get_children()
+			var board_positions = board_of(current_turn_state.owner).get_children()
 			for pos in board_positions:
 				if pos.get_children():
 					pos.get_child(0).attacked = true
 
 			# check triggered effects
-			check_triggered_effects(TriggerType.ON_TURN_END)
+			check_triggered_effects(TriggeredEffect.TriggerType.ON_TURN_END)
 
 			current_turn_state.turn += 1
-			current_turn_state.owner = players.CPU if current_turn_state.owner == players.PLAYER else players.PLAYER
+			current_turn_state.owner = Seat.P2 if current_turn_state.owner == Seat.P1 else Seat.P1
 
 			# disable end turn button, no matter which turn
 			$EndTurnButton.disabled = true
@@ -216,7 +207,7 @@ func _on_end_turn_button_pressed() -> void:
 
 # create card in hand
 func create_card(card_owner, card_name):
-	var owner_hand = $Board/PlayerHand if card_owner == players.PLAYER else $Board/CPUHand
+	var owner_hand = hand_of(card_owner)
 
 	# check hand size
 	var positions = owner_hand.get_children()
@@ -226,6 +217,7 @@ func create_card(card_owner, card_name):
 			# available position!
 			# create card
 			var card_interface_instance = card_interface_scene.instantiate()
+			card_interface_instance.main_scene = self
 			card_interface_instance.card_name = cards[card_name].name
 			card_interface_instance.cost = cards[card_name].cost
 			card_interface_instance.rarity = cards[card_name].rarity
@@ -237,11 +229,9 @@ func create_card(card_owner, card_name):
 			card_interface_instance.triggered_effects = cards[card_name].triggered_effects
 			card_interface_instance.requires_target = cards[card_name].requires_target
 			card_interface_instance.card_owner = card_owner
-			card_interface_instance.owner_node = ($Player if card_owner == players.PLAYER else $Player2)
+			card_interface_instance.owner_node = controller_of(card_owner)
 			card_interface_instance.art = cards[card_name].art
 			pos.add_child(card_interface_instance)
-			#pos.slot_order = 0
-			#reorder_slots()
 
 			return true
 
@@ -250,7 +240,7 @@ func create_card(card_owner, card_name):
 
 # spawn minion on board
 func spawn_minion(minion_owner, minion_name, triggered_effects = []):
-	var board = $Board/PlayerBoard if minion_owner == players.PLAYER else $Board/CPUBoard
+	var board = board_of(minion_owner)
 
 	# check available positions
 	var positions = board.get_children()
@@ -260,13 +250,14 @@ func spawn_minion(minion_owner, minion_name, triggered_effects = []):
 			# available position!
 			# spawn minion
 			var minion_instance = minion_scene.instantiate()
+			minion_instance.main_scene = self
 			minion_instance.minion_name = cards[minion_name].name
 			minion_instance.BASE_ATTACK = cards[minion_name].attack
 			minion_instance.BASE_HEALTH = cards[minion_name].health
 			minion_instance.type = cards[minion_name].minion_type
 			minion_instance.triggered_effects = triggered_effects
 			minion_instance.minion_owner = minion_owner
-			minion_instance.owner_node = ($Player if minion_owner == players.PLAYER else $Player2)
+			minion_instance.owner_node = controller_of(minion_owner)
 			minion_instance.art = cards[minion_name].art
 			pos.add_child(minion_instance)
 
@@ -292,40 +283,28 @@ func clear_targeting():
 	selected_source = null
 
 func resolve_deaths():
-	var board1 = $Board/PlayerBoard
-	var board2 = $Board/CPUBoard
-
-	for pos in board1.get_children():
-		if pos.get_children():
-			var minion = pos.get_child(0)
-			if minion.is_dead:
-				# queue trigger then remove from board
-				for trigger in minion.triggered_effects:
-					if trigger.trigger_type == TriggerType.ON_DEATH:
-						trigger_queue.append({'source': minion, 'owner_node': minion.owner_node, 'trigger': trigger})
-				print('freeing minion ', minion)
-				minion.get_parent().remove_child(minion)
-
-	for pos in board2.get_children():
-		if pos.get_children():
-			var minion = pos.get_child(0)
-			if minion.is_dead:
-				# queue trigger then remove from board
-				for trigger in minion.triggered_effects:
-					if trigger.trigger_type == TriggerType.ON_DEATH:
-						trigger_queue.append({'source': minion, 'owner_node': minion.owner_node, 'trigger': trigger})
-				print('freeing minion ', minion)
-				minion.get_parent().remove_child(minion)
+	for i in range(2):
+		var board = board_of(i)
+		for pos in board.get_children():
+			if pos.get_children():
+				var minion = pos.get_child(0)
+				if minion.is_dead:
+					# queue trigger then remove from board
+					for trigger in minion.triggered_effects:
+						if trigger.trigger_type == TriggeredEffect.TriggerType.ON_DEATH:
+							trigger_queue.append({'source': minion, 'owner_node': minion.owner_node, 'trigger': trigger})
+					print('freeing minion ', minion)
+					minion.get_parent().remove_child(minion)
 
 func resolve_trigger_queue():
 	while trigger_queue.size() > 0:
 		var dict = trigger_queue.pop_front()
 		for effect in dict.trigger.effects:
 			var owner_node = dict.owner_node
-			var board1 = $Board/PlayerBoard if dict.owner_node.name == 'Player' else $Board/CPUBoard
-			var board2 = $Board/PlayerBoard if not dict.owner_node.name == 'Player' else $Board/CPUBoard
-			var char1 = $Board/PlayerChar/Char if dict.owner_node.name == 'Player' else $Board/CPUChar/Char
-			var char2 = $Board/PlayerChar/Char if not dict.owner_node.name == 'Player' else $Board/CPUChar/Char
+			var board1 = board_of(owner_node.seat)
+			var board2 = board_of(opponent_of(owner_node.seat))
+			var char1 = char_of(owner_node.seat)
+			var char2 = char_of(opponent_of(owner_node.seat))
 
 			var targets = effect.target_selector.get_targets(self, null, owner_node, char1, char2, board1, board2)
 			print('tringgering effect for minion ', dict.source)
@@ -338,20 +317,13 @@ func resolve_trigger_queue():
 				effect.execute(dict.source, null)
 
 func clear_deaths():
-	var board1 = $Board/PlayerBoard
-	var board2 = $Board/CPUBoard
-
-	for pos in board1.get_children():
-		if pos.get_children():
-			var minion = pos.get_child(0)
-			if minion.is_dead:
-				minion.queue_free()
-
-	for pos in board2.get_children():
-		if pos.get_children():
-			var minion = pos.get_child(0)
-			if minion.is_dead:
-				minion.queue_free()
+	for i in range(2):
+		var board = board_of(i)
+		for pos in board.get_children():
+			if pos.get_children():
+				var minion = pos.get_child(0)
+				if minion.is_dead:
+					minion.queue_free()
 
 # this is used to solve trigger effects order when minions die
 func handle_trigger_queue():
@@ -360,11 +332,11 @@ func handle_trigger_queue():
 	clear_deaths()
 
 func check_triggered_effects(trigger_type):
-	var owner_node = $Player if current_turn_state.owner == players.PLAYER else $Player2
-	var board1 = $Board/PlayerBoard if current_turn_state.owner == players.PLAYER else $Board/CPUBoard
-	var board2 = $Board/PlayerBoard if current_turn_state.owner != players.PLAYER else $Board/CPUBoard
-	var char1 = $Board/PlayerChar/Char if current_turn_state.owner == players.PLAYER else $Board/CPUChar/Char
-	var char2 = $Board/PlayerChar/Char if current_turn_state.owner != players.PLAYER else $Board/CPUChar/Char
+	var owner_node = controller_of(current_turn_state.owner)
+	var board1 = board_of(current_turn_state.owner)
+	var board2 = board_of(opponent_of(current_turn_state.owner))
+	var char1 = char_of(current_turn_state.owner)
+	var char2 = char_of(opponent_of(current_turn_state.owner))
 
 	for pos in board1.get_children():
 		if pos.get_children():
@@ -416,25 +388,19 @@ func on_object_clicked(obj):
 
 # player health from char node {{{
 func get_player_health(char):
-	if char == $Board/PlayerChar/Char:
-		return {'total': player1_state.health, 'current': player1_state.current_health}
+	var player_state_info = player_state[seat_of_char(char)]
 
-	return {'total': player2_state.health, 'current': player2_state.current_health}
+	return {'total': player_state_info.health, 'current': player_state_info.current_health}
 
 # type: damage, heal
 #
 func handle_player_health(char, type, amount):
-	if char == $Board/PlayerChar/Char:
-		if type == 'damage':
-			player1_state.current_health -= amount
-		if type == 'heal':
-			player1_state.current_health = min(player1_state.current_health + amount, player1_state.health)
+	var player_state_info = player_state[seat_of_char(char)]
 
-	else:
-		if type == 'damage':
-			player2_state.current_health -= amount
-		if type == 'heal':
-			player2_state.current_health = min(player2_state.current_health + amount, player2_state.health)
+	if type == 'damage':
+		player_state_info.current_health -= amount
+	elif type == 'heal':
+		player_state_info.current_health = min(player_state_info.current_health + amount, player_state_info.health)
 # }}}
 
 func end_game():
@@ -456,11 +422,11 @@ func _input(event):
 
 	# create player minion
 	if event.is_action_pressed('f2'):
-		create_card(players.PLAYER, 'knight')
+		create_card(Seat.P1, 'knight')
 
 	# create cpu minion
 	if event.is_action_pressed('f3'):
-		spawn_minion(players.CPU, 'zombie')
+		spawn_minion(Seat.P2, 'zombie')
 
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = false
