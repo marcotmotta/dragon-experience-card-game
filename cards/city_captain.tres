@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://duu642xhh3fb0"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_fdhlj"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_3ba4g"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_2gask"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_43s6t"]
+[ext_resource type="Script" uid="uid://db0bm7f1kwscm" path="res://effects/summon_minion.gd" id="5_8it6v"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="6_pfp4q"]
+
+[sub_resource type="Resource" id="Resource_mxkdy"]
+script = ExtResource("6_pfp4q")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_6wcib"]
+script = ExtResource("5_8it6v")
+minion_type = "Knight"
+target_selector = SubResource("Resource_mxkdy")
+metadata/_custom_type_script = "uid://db0bm7f1kwscm"
+
+[sub_resource type="Resource" id="Resource_ywcgm"]
+script = ExtResource("2_3ba4g")
+effects = Array[ExtResource("4_43s6t")]([SubResource("Resource_6wcib")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_fdhlj")
+name = "City Captain"
+type = "minion"
+rarity = "common"
+cost = 3
+description = "On Play: Summon a 1/1 'Knight'."
+attack = 2
+health = 3
+triggered_effects = Array[ExtResource("2_3ba4g")]([SubResource("Resource_ywcgm")])
+art = "res://assets/minion_city_captain.png"

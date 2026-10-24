@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b70vmofbsu4s2"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_cojn8"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_jcp4l"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_wu4ra"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_osux7"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="5_ygmsc"]
+[ext_resource type="Script" uid="uid://boxeljqtapdcd" path="res://effects/helpers/random_ally_minion_selector.gd" id="6_cojn8"]
+
+[sub_resource type="Resource" id="Resource_jcp4l"]
+script = ExtResource("6_cojn8")
+metadata/_custom_type_script = "uid://boxeljqtapdcd"
+
+[sub_resource type="Resource" id="Resource_cojn8"]
+script = ExtResource("5_ygmsc")
+attack_amount = 1
+health_amount = 1
+target_selector = SubResource("Resource_jcp4l")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_vke8t"]
+script = ExtResource("2_jcp4l")
+trigger_type = 1
+effects = Array[ExtResource("4_osux7")]([SubResource("Resource_cojn8")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_cojn8")
+name = "Crawling Hand"
+type = "minion"
+minion_type = "Undead"
+rarity = "common"
+cost = 1
+description = "On Death: Give a random ally minion +1/+1."
+attack = 1
+health = 1
+triggered_effects = Array[ExtResource("2_jcp4l")]([SubResource("Resource_vke8t")])
+art = "res://assets/minion_crawling_hand.png"

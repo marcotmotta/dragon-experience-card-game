@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c8hm2otkex7en"]
 
-[ext_resource type="Script" uid="uid://cl8l3w6jrw6lj" path="res://vfx/damage/vfx_damage.gd" id="1_n2av7"]
+[ext_resource type="Script" uid="uid://cl8l3w6jrw6lj" path="res://vfx/vfx.gd" id="1_n2av7"]
 
 [sub_resource type="Curve" id="Curve_4tgc7"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

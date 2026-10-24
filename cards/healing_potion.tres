@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bdbf2rkwla0t1"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_5a0k7"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_lhqyp"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_fb3ij"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_lhqyp"]
+[ext_resource type="Script" uid="uid://wcjniw2waj4e" path="res://effects/heal_target.gd" id="4_74ps2"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="5_6m1gw"]
+
+[sub_resource type="Resource" id="Resource_6e3aa"]
+script = ExtResource("5_6m1gw")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_je3py"]
+script = ExtResource("4_74ps2")
+amount = 3
+target_selector = SubResource("Resource_6e3aa")
+metadata/_custom_type_script = "uid://wcjniw2waj4e"
+
+[sub_resource type="Resource" id="Resource_jk0yp"]
+script = ExtResource("2_lhqyp")
+effects = Array[ExtResource("3_fb3ij")]([SubResource("Resource_je3py")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_5a0k7")
+name = "Healing Potion"
+type = "spell"
+rarity = "common"
+cost = 1
+description = "Heal 3."
+requires_target = true
+triggered_effects = Array[ExtResource("2_lhqyp")]([SubResource("Resource_jk0yp")])
+art = "res://assets/art_health_potion.png"

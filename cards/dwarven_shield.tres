@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b0puf8w5uo3g1"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_p6ltd"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_fsbxw"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_4ftbh"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_kteeb"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="5_pea3k"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="6_p6ltd"]
+[ext_resource type="Script" uid="uid://rs2bxnwb04fs" path="res://effects/helpers/conditions/target_minion_condition.gd" id="7_p6ltd"]
+[ext_resource type="Script" uid="uid://pl65ussys7p4" path="res://effects/give_property.gd" id="8_p6ltd"]
+
+[sub_resource type="Resource" id="Resource_4ftbh"]
+script = ExtResource("6_p6ltd")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_kteeb"]
+script = ExtResource("5_pea3k")
+attack_amount = 1
+health_amount = 1
+target_selector = SubResource("Resource_4ftbh")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_ch8tt"]
+script = ExtResource("2_fsbxw")
+effects = Array[ExtResource("4_kteeb")]([SubResource("Resource_kteeb")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[sub_resource type="Resource" id="Resource_p6ltd"]
+script = ExtResource("7_p6ltd")
+minion_type = "Dwarf"
+metadata/_custom_type_script = "uid://rs2bxnwb04fs"
+
+[sub_resource type="Resource" id="Resource_6xufx"]
+script = ExtResource("6_p6ltd")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_la24q"]
+script = ExtResource("8_p6ltd")
+given_property = "Sentinel"
+target_selector = SubResource("Resource_6xufx")
+metadata/_custom_type_script = "uid://pl65ussys7p4"
+
+[sub_resource type="Resource" id="Resource_fsbxw"]
+script = ExtResource("2_fsbxw")
+conditions = Array[ExtResource("3_4ftbh")]([SubResource("Resource_p6ltd")])
+effects = Array[ExtResource("4_kteeb")]([SubResource("Resource_la24q")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_p6ltd")
+name = "Dwarven Shield"
+type = "spell"
+rarity = "uncommon"
+cost = 2
+description = "Give a minion +1/+1. If it's a Dwarf, also give it Sentinel."
+requires_target = true
+triggered_effects = Array[ExtResource("2_fsbxw")]([SubResource("Resource_ch8tt"), SubResource("Resource_fsbxw")])
+art = "res://assets/art_dwarven_shield.png"

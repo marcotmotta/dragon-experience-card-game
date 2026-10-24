@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="2_ajdl3"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_pemfm"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_inb2y"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_npn0p"]
 [ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="4_npn0p"]
-[ext_resource type="Script" uid="uid://d0lrt347dvkow" path="res://effects/helpers/random_enemies_selector.gd" id="5_inb2y"]
+[ext_resource type="Script" uid="uid://d0lrt347dvkow" path="res://effects/helpers/random_enemy_selector.gd" id="5_inb2y"]
 
 [sub_resource type="Resource" id="Resource_npn0p"]
 script = ExtResource("5_inb2y")
@@ -24,10 +25,19 @@ script = ExtResource("4_npn0p")
 target_selector = SubResource("Resource_3bmp4")
 metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
 
+[sub_resource type="Resource" id="Resource_5gtct"]
+script = ExtResource("5_inb2y")
+metadata/_custom_type_script = "uid://d0lrt347dvkow"
+
+[sub_resource type="Resource" id="Resource_5rt6p"]
+script = ExtResource("4_npn0p")
+target_selector = SubResource("Resource_5gtct")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
 [sub_resource type="Resource" id="Resource_v7vca"]
 script = ExtResource("2_pemfm")
 trigger_type = 1
-effects = Array[ExtResource("3_inb2y")]([SubResource("Resource_wxic7"), SubResource("Resource_py0wr")])
+effects = Array[ExtResource("3_inb2y")]([SubResource("Resource_wxic7"), SubResource("Resource_py0wr"), SubResource("Resource_5rt6p")])
 metadata/_custom_type_script = "uid://bbeal5odbm3db"
 
 [resource]
@@ -37,7 +47,7 @@ type = "minion"
 minion_type = "Undead"
 rarity = "common"
 cost = 4
-description = "On Death: Deal 2 damage randomly split among all enemies."
+description = "On Death: Deal 3 damage randomly split among all enemies."
 attack = 4
 health = 3
 triggered_effects = Array[ExtResource("2_pemfm")]([SubResource("Resource_v7vca")])

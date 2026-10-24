@@ -11,17 +11,17 @@ outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_do5ra"]
-font_size = 45
+font_size = 55
 outline_size = 10
 outline_color = Color(0, 0, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ubsfs"]
-font_size = 45
+font_size = 55
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ts7i5"]
-font_size = 45
+font_size = 55
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
@@ -33,6 +33,16 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="Curve" id="Curve_onoj1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_mxxud"]
+font_size = 24
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2u5ma"]
+font_size = 24
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvsbi"]
 size = Vector2(240, 388)
@@ -65,9 +75,9 @@ texture = ExtResource("3_do5ra")
 [node name="CardName" type="Label" parent="UI" unique_id=391914298]
 layout_mode = 0
 offset_left = -200.0
-offset_top = -163.0
+offset_top = -164.0
 offset_right = 200.0
-offset_bottom = -135.0
+offset_bottom = -128.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "CARD NAME "
 label_settings = SubResource("LabelSettings_85rju")
@@ -77,41 +87,52 @@ vertical_alignment = 1
 [node name="Cost" type="Label" parent="UI" unique_id=862348980]
 layout_mode = 0
 offset_left = -122.0
-offset_top = -208.0
-offset_right = -71.0
-offset_bottom = -145.0
+offset_top = -216.0
+offset_right = -67.0
+offset_bottom = -153.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "10"
 label_settings = SubResource("LabelSettings_do5ra")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Attack" type="Label" parent="UI" unique_id=514200973]
 layout_mode = 0
-offset_left = -122.0
-offset_top = 140.0
-offset_right = -71.0
-offset_bottom = 203.0
+offset_left = -120.0
+offset_top = 143.0
+offset_right = -65.0
+offset_bottom = 206.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "10"
 label_settings = SubResource("LabelSettings_ubsfs")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Health" type="Label" parent="UI" unique_id=1588570583]
 layout_mode = 0
-offset_left = 67.0
+offset_left = 65.0
 offset_top = 143.0
-offset_right = 118.0
+offset_right = 120.0
 offset_bottom = 206.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "10"
 label_settings = SubResource("LabelSettings_ts7i5")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="UI" unique_id=1843140780]
 layout_mode = 0
 offset_left = -107.0
 offset_top = 80.0
 offset_right = 108.0
-offset_bottom = 160.0
+offset_bottom = 156.0
 mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
 bbcode_enabled = true
 text = "essa carta tem um efeito esparrado que se pa nem cabe aqui."
 horizontal_alignment = 1
@@ -123,6 +144,7 @@ offset_left = -104.0
 offset_top = 161.0
 offset_right = 104.0
 offset_bottom = 189.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "Undead"
 label_settings = SubResource("LabelSettings_t45bj")
 horizontal_alignment = 1
@@ -131,6 +153,59 @@ vertical_alignment = 1
 [node name="Line2D" type="Line2D" parent="." unique_id=1501705782]
 z_index = 10
 width_curve = SubResource("Curve_onoj1")
+
+[node name="PropertiesDescriptions" type="VBoxContainer" parent="." unique_id=238445423]
+visible = false
+offset_left = 285.0
+offset_top = -722.0
+offset_right = 285.0
+offset_bottom = -522.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="ResilientDescription" type="Control" parent="PropertiesDescriptions" unique_id=1635041712]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PropertiesDescriptions/ResilientDescription" unique_id=149610655]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 123.0
+offset_bottom = 39.0
+text = "Resilient:
+Takes 1 less damage."
+label_settings = SubResource("LabelSettings_mxxud")
+
+[node name="ColorRect" type="ColorRect" parent="PropertiesDescriptions/ResilientDescription/Label" unique_id=404143773]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -5.0
+offset_top = -2.0
+offset_right = 265.0
+offset_bottom = 71.0
+color = Color(0.03, 0.03, 0.03, 0.8627451)
+
+[node name="SentinelDescription" type="Control" parent="PropertiesDescriptions" unique_id=525245148]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PropertiesDescriptions/SentinelDescription" unique_id=1195509505]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 123.0
+offset_bottom = 58.0
+text = "Sentinel:
+Enemies must attack
+this minion first."
+label_settings = SubResource("LabelSettings_2u5ma")
+
+[node name="ColorRect" type="ColorRect" parent="PropertiesDescriptions/SentinelDescription/Label" unique_id=1850458620]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -5.0
+offset_top = -2.0
+offset_right = 265.0
+offset_bottom = 106.0
+color = Color(0.03137255, 0.03137255, 0.03137255, 0.8627451)
 
 [node name="CardBack" type="Control" parent="." unique_id=1887608351]
 visible = false

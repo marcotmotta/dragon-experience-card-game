@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://burpw3tyusnq3"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_lhg04"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_lff3o"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_onvah"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_idvoc"]
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="5_fygab"]
+[ext_resource type="Script" uid="uid://dtbkfdufk31s6" path="res://effects/helpers/enemy_hero_selector.gd" id="6_4xwk0"]
+[ext_resource type="Script" uid="uid://bydsyxxm5i18a" path="res://effects/draw_cards.gd" id="7_a6xh8"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="8_jl42a"]
+
+[sub_resource type="Resource" id="Resource_2olse"]
+script = ExtResource("6_4xwk0")
+metadata/_custom_type_script = "uid://dtbkfdufk31s6"
+
+[sub_resource type="Resource" id="Resource_et0ok"]
+script = ExtResource("5_fygab")
+target_selector = SubResource("Resource_2olse")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_50yfu"]
+script = ExtResource("8_jl42a")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_corad"]
+script = ExtResource("7_a6xh8")
+target_selector = SubResource("Resource_50yfu")
+metadata/_custom_type_script = "uid://bydsyxxm5i18a"
+
+[sub_resource type="Resource" id="Resource_n8qhj"]
+script = ExtResource("2_lff3o")
+trigger_type = 1
+effects = Array[ExtResource("4_idvoc")]([SubResource("Resource_et0ok"), SubResource("Resource_corad")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_lhg04")
+name = "Zarran, Guild Spy"
+type = "minion"
+rarity = "epic"
+cost = 2
+description = "On Death: Deal 1 damage to the enemy hero and draw a card."
+attack = 1
+health = 1
+triggered_effects = Array[ExtResource("2_lff3o")]([SubResource("Resource_n8qhj")])
+art = "res://assets/minion_guild_spy.png"

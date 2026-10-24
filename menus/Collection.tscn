@@ -5,14 +5,44 @@
 [node name="Collection" type="Node2D" unique_id=774963207]
 script = ExtResource("1_rqewf")
 
+[node name="OrderMenu" type="HBoxContainer" parent="." unique_id=1929611978]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_right = 740.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="OrderByCost" type="Button" parent="OrderMenu" unique_id=1760303482]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Order By Cost"
+
+[node name="OrderByName" type="Button" parent="OrderMenu" unique_id=600467574]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Order By Name"
+
+[node name="OrderByRarity" type="Button" parent="OrderMenu" unique_id=1018569153]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Order By Rarity"
+
 [node name="Control" type="HBoxContainer" parent="." unique_id=1426580482]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -10.0
-offset_top = -2.0
-offset_right = 1270.0
-offset_bottom = 718.0
+offset_top = 40.0
+offset_right = 1280.0
+offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -23,7 +53,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GridContainer" type="GridContainer" parent="Control/ScrollContainer" unique_id=1848708833]
-custom_minimum_size = Vector2(0, 1450)
+custom_minimum_size = Vector2(0, 1800)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -50,4 +80,7 @@ grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "Main Menu"
 
+[connection signal="pressed" from="OrderMenu/OrderByCost" to="." method="_on_order_by_cost_pressed"]
+[connection signal="pressed" from="OrderMenu/OrderByName" to="." method="_on_order_by_name_pressed"]
+[connection signal="pressed" from="OrderMenu/OrderByRarity" to="." method="_on_order_by_rarity_pressed"]
 [connection signal="pressed" from="Control/Control/Menu" to="." method="_on_menu_pressed"]

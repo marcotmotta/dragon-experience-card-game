@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://ejhksjeiyxk"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_gkrbl"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_kbx6y"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_3iq1f"]
+[ext_resource type="Script" uid="uid://d2yx8vuo1gg1f" path="res://effects/add_cards.gd" id="5_db663"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="5_nfvjh"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="6_n1nul"]
+
+[sub_resource type="Resource" id="Resource_gkrbl"]
+script = ExtResource("6_n1nul")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_n1nul"]
+script = ExtResource("5_db663")
+card_pool = "Dwarf Minions"
+amount = "1"
+target_selector = SubResource("Resource_gkrbl")
+metadata/_custom_type_script = "uid://d2yx8vuo1gg1f"
+
+[sub_resource type="Resource" id="Resource_m5pt1"]
+script = ExtResource("2_kbx6y")
+trigger_type = 1
+effects = Array[ExtResource("5_nfvjh")]([SubResource("Resource_n1nul")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_gkrbl")
+name = "Battlefront Warrior"
+type = "minion"
+minion_type = "Dwarf"
+rarity = "common"
+cost = 2
+description = "On Death: Add a random Dwarf to your hand."
+attack = 2
+health = 1
+triggered_effects = Array[ExtResource("2_kbx6y")]([SubResource("Resource_m5pt1")])
+art = "res://assets/minion_battlefront_warrior.png"

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_3vu7j"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_o4ba8"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_o4ba8"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_sajlp"]
 [ext_resource type="Script" uid="uid://db0bm7f1kwscm" path="res://effects/summon_minion.gd" id="4_3vu7j"]
 [ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_o4ba8"]

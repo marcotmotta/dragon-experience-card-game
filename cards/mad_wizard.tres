@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bcdvnuby63avn"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_dokc5"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_5p6t4"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_rjwf1"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_spcw2"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="5_dqvli"]
+[ext_resource type="Script" uid="uid://odbgxfoby0hg" path="res://effects/helpers/self_target_selector.gd" id="6_7sr22"]
+
+[sub_resource type="Resource" id="Resource_lpos2"]
+script = ExtResource("6_7sr22")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_v5uhr"]
+script = ExtResource("5_dqvli")
+attack_amount = 3
+target_selector = SubResource("Resource_lpos2")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_2bbkp"]
+script = ExtResource("2_5p6t4")
+trigger_type = 4
+effects = Array[ExtResource("4_spcw2")]([SubResource("Resource_v5uhr")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_dokc5")
+name = "Mad Wizard"
+type = "minion"
+rarity = "uncommon"
+cost = 6
+description = "Start of Turn: Gain +3 Attack."
+attack = 3
+health = 7
+triggered_effects = Array[ExtResource("2_5p6t4")]([SubResource("Resource_2bbkp")])
+art = "res://assets/minion_mad_wizard.png"

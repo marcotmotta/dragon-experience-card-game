@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cybkybtxuu6dj" path="res://game_controller.gd" id="1_hdcam"]
 [ext_resource type="Script" uid="uid://bncyw0tiydib0" path="res://player_controller.gd" id="2_r0du0"]
 [ext_resource type="Script" uid="uid://dm7dqtfhlkrfc" path="res://cpu_controller.gd" id="3_r0du0"]
-[ext_resource type="Script" uid="uid://ciuhyclldvoaf" path="res://slot.gd" id="5_3dxm6"]
 [ext_resource type="PackedScene" uid="uid://dyp0xklqv0cl" path="res://Char.tscn" id="5_fos0i"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_trn2v"]
@@ -19,6 +18,10 @@ font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_cm0pq"]
 font_size = 30
+
+[sub_resource type="GDScript" id="GDScript_cm0pq"]
+script/source = "extends Control
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_fos0i"]
 font_size = 30
@@ -77,7 +80,7 @@ label_settings = SubResource("LabelSettings_trn2v")
 vertical_alignment = 1
 
 [node name="CPUMana" type="Label" parent="." unique_id=2007737726]
-offset_left = 1092.0
+offset_left = 1083.0
 offset_top = 8.0
 offset_right = 1270.0
 offset_bottom = 50.0
@@ -114,9 +117,9 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="PlayerMana" type="Label" parent="." unique_id=1473451269]
-offset_left = 1095.0
+offset_left = 1083.0
 offset_top = 670.0
-offset_right = 1273.0
+offset_right = 1270.0
 offset_bottom = 712.0
 text = "Mana: 10/10"
 label_settings = SubResource("LabelSettings_cm0pq")
@@ -135,43 +138,43 @@ theme_override_constants/separation = 122
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos2" type="Control" parent="Board/CPUHand" unique_id=952669713]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos3" type="Control" parent="Board/CPUHand" unique_id=677954835]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos4" type="Control" parent="Board/CPUHand" unique_id=894935026]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos5" type="Control" parent="Board/CPUHand" unique_id=1390248332]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos6" type="Control" parent="Board/CPUHand" unique_id=293321548]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos7" type="Control" parent="Board/CPUHand" unique_id=1985539927]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="CPUChar" type="Control" parent="Board" unique_id=1784477740]
 layout_mode = 2
@@ -287,43 +290,76 @@ theme_override_constants/separation = 122
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos2" type="Control" parent="Board/PlayerHand" unique_id=416877488]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos3" type="Control" parent="Board/PlayerHand" unique_id=1656357439]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos4" type="Control" parent="Board/PlayerHand" unique_id=236790511]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos5" type="Control" parent="Board/PlayerHand" unique_id=471715714]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos6" type="Control" parent="Board/PlayerHand" unique_id=1979922044]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
 
 [node name="Pos7" type="Control" parent="Board/PlayerHand" unique_id=1060212587]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-script = ExtResource("5_3dxm6")
+script = SubResource("GDScript_cm0pq")
+
+[node name="ZoomUI" type="Control" parent="." unique_id=664105668]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = 360.0
+offset_right = 200.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ZoomUI" unique_id=1758591354]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -150.0
+offset_right = 105.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="ZoomUITimer" type="Timer" parent="ZoomUI" unique_id=983104037]
+wait_time = 3.5
+one_shot = true
 
 [node name="EndTurnButton" type="Button" parent="." unique_id=1602023882]
 offset_left = 1149.0
@@ -433,6 +469,7 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "MAIN MENU"
 
+[connection signal="timeout" from="ZoomUI/ZoomUITimer" to="." method="_on_zoom_ui_timer_timeout"]
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="EndGameUI/Control/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="MenuUI/Control/Resume" to="." method="_on_resume_pressed"]

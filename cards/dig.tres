@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bydsyxxm5i18a" path="res://effects/draw_cards.gd" id="2_2i2wi"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_r6b4x"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_jt6hs"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_pmai5"]
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="3_r6b4x"]
 [ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_pmai5"]
 

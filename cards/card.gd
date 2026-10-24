@@ -8,11 +8,15 @@ class_name CardData
 @export var rarity: String
 @export var cost: int
 @export var description: String
-@export var requires_target: bool
 
-# for minions
+# for minions only
 @export var attack: int
 @export var health: int
+
+# targeting rules
+@export var requires_target: bool
+@export var target_optional: bool = false
+@export var target_restriction: TargetRestriction
 
 # effects
 @export var triggered_effects: Array[TriggeredEffect]

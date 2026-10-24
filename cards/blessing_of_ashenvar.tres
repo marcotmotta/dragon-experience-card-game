@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_ro5vw"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_p33yl"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_nu1f6"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_p33yl"]
 [ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="4_fvxeu"]
 [ext_resource type="Script" uid="uid://bwe401orbab24" path="res://effects/helpers/all_ally_minions_selector.gd" id="5_stlwm"]
 

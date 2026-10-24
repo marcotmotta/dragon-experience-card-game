@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://d2wr47efeyh6g"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_mm8fd"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_xtecd"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_k8bny"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_67kjo"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="5_bqww2"]
+[ext_resource type="Script" uid="uid://boxeljqtapdcd" path="res://effects/helpers/random_ally_minion_selector.gd" id="6_vmpuo"]
+
+[sub_resource type="Resource" id="Resource_uskum"]
+script = ExtResource("6_vmpuo")
+metadata/_custom_type_script = "uid://boxeljqtapdcd"
+
+[sub_resource type="Resource" id="Resource_d5kqc"]
+script = ExtResource("5_bqww2")
+health_amount = 1
+target_selector = SubResource("Resource_uskum")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_bqww2"]
+script = ExtResource("2_xtecd")
+trigger_type = 5
+effects = Array[ExtResource("4_67kjo")]([SubResource("Resource_d5kqc")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_mm8fd")
+name = "Flame Acolyte"
+type = "minion"
+minion_type = "Dwarf"
+rarity = "uncommon"
+cost = 1
+description = "End of Turn: Give a random ally minion +1 health."
+health = 1
+triggered_effects = Array[ExtResource("2_xtecd")]([SubResource("Resource_bqww2")])
+art = "res://assets/minion_flame_acolyte.png"

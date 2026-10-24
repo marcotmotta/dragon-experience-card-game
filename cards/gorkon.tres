@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b6sniyer4evks"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_0hq34"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_s321t"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_46smq"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_ewdlf"]
+[ext_resource type="Script" uid="uid://db0bm7f1kwscm" path="res://effects/summon_minion.gd" id="5_0hq34"]
+[ext_resource type="Script" uid="uid://pl65ussys7p4" path="res://effects/give_property.gd" id="5_46smq"]
+[ext_resource type="Script" uid="uid://odbgxfoby0hg" path="res://effects/helpers/self_target_selector.gd" id="6_ewdlf"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="6_s321t"]
+
+[sub_resource type="Resource" id="Resource_aypye"]
+script = ExtResource("6_ewdlf")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_7xauh"]
+script = ExtResource("5_46smq")
+given_property = "Sentinel"
+target_selector = SubResource("Resource_aypye")
+metadata/_custom_type_script = "uid://pl65ussys7p4"
+
+[sub_resource type="Resource" id="Resource_luamg"]
+script = ExtResource("2_s321t")
+trigger_type = 2
+effects = Array[ExtResource("4_ewdlf")]([SubResource("Resource_7xauh")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[sub_resource type="Resource" id="Resource_46smq"]
+script = ExtResource("6_s321t")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_ewdlf"]
+script = ExtResource("5_0hq34")
+minion_type = "Goblin"
+target_selector = SubResource("Resource_46smq")
+metadata/_custom_type_script = "uid://db0bm7f1kwscm"
+
+[sub_resource type="Resource" id="Resource_5ec5w"]
+script = ExtResource("2_s321t")
+trigger_type = 6
+effects = Array[ExtResource("4_ewdlf")]([SubResource("Resource_ewdlf")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_0hq34")
+name = "Gorkon, Bridge Chieftain"
+type = "minion"
+rarity = "epic"
+cost = 5
+description = "Sentinel. Whenever this minion takes damage, summon a 1/1 'Goblin'."
+attack = 3
+health = 5
+triggered_effects = Array[ExtResource("2_s321t")]([SubResource("Resource_luamg"), SubResource("Resource_5ec5w")])
+art = "res://assets/minion_gorkon.png"

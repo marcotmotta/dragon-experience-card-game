@@ -27,5 +27,76 @@ text = "PLAY"
 layout_mode = 2
 text = "COLLECTION"
 
+[node name="ChooseDeckLabel" type="Label" parent="." unique_id=152504231]
+offset_left = 490.0
+offset_top = 494.0
+offset_right = 790.0
+offset_bottom = 515.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "SELECT A DECK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Decks" type="HBoxContainer" parent="." unique_id=268531281]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 140.0
+offset_top = 536.0
+offset_right = 1140.0
+offset_bottom = 576.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="ElfDeck" type="Button" parent="Decks" unique_id=385845416]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Elven Reunion"
+
+[node name="UndeadDeck" type="Button" parent="Decks" unique_id=433554610]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Deal With the Dead"
+
+[node name="DwarfDeck" type="Button" parent="Decks" unique_id=1298907874]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Dwarven Brigade"
+
+[node name="StreetsDeck" type="Button" parent="Decks" unique_id=1317290700]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lost in the City Streets"
+
+[node name="FiendDeck" type="Button" parent="Decks" unique_id=660618392]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "From the Hells!"
+
+[node name="TestDeck" type="Button" parent="Decks" unique_id=1642361340]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Test Deck
+"
+
+[node name="ChosenDeck" type="Label" parent="." unique_id=1616402293]
+offset_left = 490.0
+offset_top = 581.0
+offset_right = 790.0
+offset_bottom = 631.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Selected Deck:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Collection" to="." method="_on_collection_pressed"]
+[connection signal="pressed" from="Decks/ElfDeck" to="." method="_on_elf_deck_pressed"]
+[connection signal="pressed" from="Decks/UndeadDeck" to="." method="_on_undead_deck_pressed"]
+[connection signal="pressed" from="Decks/DwarfDeck" to="." method="_on_dwarf_deck_pressed"]
+[connection signal="pressed" from="Decks/StreetsDeck" to="." method="_on_streets_deck_pressed"]
+[connection signal="pressed" from="Decks/FiendDeck" to="." method="_on_fiend_deck_pressed"]
+[connection signal="pressed" from="Decks/TestDeck" to="." method="_on_test_deck_pressed"]

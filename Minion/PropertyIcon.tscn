@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5ooukm846kkm"]
 
-[ext_resource type="Texture2D" uid="uid://b7w0ow81sjou1" path="res://assets/icon_protection.png" id="1_37fg5"]
+[ext_resource type="Texture2D" uid="uid://b7w0ow81sjou1" path="res://assets/icon_resilient.png" id="1_37fg5"]
 
 [node name="PropertyIcon" type="Control" unique_id=1429648040]
 layout_mode = 3

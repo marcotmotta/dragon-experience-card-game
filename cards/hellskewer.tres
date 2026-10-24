@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://ctmicum5o6ppn"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_2g5xc"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_hhgou"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_iktim"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_h3fw1"]
+[ext_resource type="Script" uid="uid://pl65ussys7p4" path="res://effects/give_property.gd" id="5_g3q8c"]
+[ext_resource type="Script" uid="uid://odbgxfoby0hg" path="res://effects/helpers/self_target_selector.gd" id="6_wv8w4"]
+
+[sub_resource type="Resource" id="Resource_ap0m3"]
+script = ExtResource("6_wv8w4")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_to7yh"]
+script = ExtResource("5_g3q8c")
+given_property = "Resilient"
+target_selector = SubResource("Resource_ap0m3")
+metadata/_custom_type_script = "uid://pl65ussys7p4"
+
+[sub_resource type="Resource" id="Resource_gqk76"]
+script = ExtResource("2_hhgou")
+trigger_type = 2
+effects = Array[ExtResource("4_h3fw1")]([SubResource("Resource_to7yh")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_2g5xc")
+name = "Hellskewer"
+type = "minion"
+minion_type = "Fiend"
+rarity = "common"
+cost = 2
+description = "Resilient"
+attack = 3
+health = 1
+triggered_effects = Array[ExtResource("2_hhgou")]([SubResource("Resource_gqk76")])
+art = "res://assets/minion_hellskewer.png"

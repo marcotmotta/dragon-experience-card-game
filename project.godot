@@ -14,14 +14,17 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="new-card"
+config/name="Dragon Experience Card Game"
+config/description="Dragon Experience Card Game"
+config/version="0.1"
 run/main_scene="uid://cpx2hcykwsjiv"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://c5p4dkqkinrft"
 
 [autoload]
 
 Globals="*uid://bf1682yfbkng1"
+GlobalAudioPlayer="*uid://c4f7ayvl20aav"
 
 [display]
 
@@ -35,6 +38,10 @@ window/stretch/aspect="ignore"
 minion=""
 card=""
 char=""
+
+[gui]
+
+theme/custom_font="uid://dt6t0r3sol34d"
 
 [input]
 

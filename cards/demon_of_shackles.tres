@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://kmno0vkmvwem"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_tcvpn"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_oi1fv"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_n85ps"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_2wmp4"]
+[ext_resource type="Script" uid="uid://pl65ussys7p4" path="res://effects/give_property.gd" id="5_oi1fv"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="5_tcvpn"]
+[ext_resource type="Script" uid="uid://odbgxfoby0hg" path="res://effects/helpers/self_target_selector.gd" id="6_oi1fv"]
+
+[sub_resource type="Resource" id="Resource_v7skw"]
+script = ExtResource("6_oi1fv")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_x065k"]
+script = ExtResource("5_oi1fv")
+given_property = "Sentinel"
+target_selector = SubResource("Resource_v7skw")
+metadata/_custom_type_script = "uid://pl65ussys7p4"
+
+[sub_resource type="Resource" id="Resource_mdj2w"]
+script = ExtResource("2_oi1fv")
+trigger_type = 2
+effects = Array[ExtResource("4_2wmp4")]([SubResource("Resource_x065k")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[sub_resource type="Resource" id="Resource_n85ps"]
+script = ExtResource("6_oi1fv")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_2wmp4"]
+script = ExtResource("5_tcvpn")
+attack_amount = 2
+target_selector = SubResource("Resource_n85ps")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_4aa2c"]
+script = ExtResource("2_oi1fv")
+trigger_type = 6
+effects = Array[ExtResource("4_2wmp4")]([SubResource("Resource_2wmp4")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_tcvpn")
+name = "Demon of Shackles"
+type = "minion"
+minion_type = "Fiend"
+rarity = "common"
+cost = 3
+description = "Sentinel. Whenever this minion takes damage, gain +2 Attack."
+attack = 2
+health = 4
+triggered_effects = Array[ExtResource("2_oi1fv")]([SubResource("Resource_mdj2w"), SubResource("Resource_4aa2c")])
+art = "res://assets/minion_demon_of_shackles.png"

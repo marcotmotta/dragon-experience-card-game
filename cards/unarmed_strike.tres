@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://8vbqng5hi588"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_enwfk"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_kk321"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_qjqpu"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_0ajvc"]
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="5_fvl3c"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="6_cnxhc"]
+
+[sub_resource type="Resource" id="Resource_nqoiu"]
+script = ExtResource("6_cnxhc")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_pj2bu"]
+script = ExtResource("5_fvl3c")
+target_selector = SubResource("Resource_nqoiu")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_t11nr"]
+script = ExtResource("2_kk321")
+effects = Array[ExtResource("4_0ajvc")]([SubResource("Resource_pj2bu")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_enwfk")
+name = "Unarmed Strike"
+type = "spell"
+rarity = "common"
+description = "Deal 1 damage."
+requires_target = true
+triggered_effects = Array[ExtResource("2_kk321")]([SubResource("Resource_t11nr")])
+art = "res://assets/art_unnarmed_strike.png"

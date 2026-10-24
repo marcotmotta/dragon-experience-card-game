@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://banr80irhk3ot"]
+
+[ext_resource type="Script" uid="uid://cl8l3w6jrw6lj" path="res://vfx/vfx.gd" id="1_ynujf"]
+
+[sub_resource type="Curve" id="Curve_4tgc7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="PowerUp" type="CPUParticles2D" unique_id=1763277922]
+emitting = false
+amount = 16
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.6
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_4tgc7")
+color = Color(1, 0.95, 0, 1)
+script = ExtResource("1_ynujf")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

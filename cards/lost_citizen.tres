@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bbs50vwafj4rs"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_bge0o"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_gyuoe"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_b33t8"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_wwdpq"]
+[ext_resource type="Script" uid="uid://db0bm7f1kwscm" path="res://effects/summon_minion.gd" id="5_ehjut"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="6_wgc1c"]
+
+[sub_resource type="Resource" id="Resource_mxkdy"]
+script = ExtResource("6_wgc1c")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_6wcib"]
+script = ExtResource("5_ehjut")
+minion_type = "Eluin Ranger"
+target_selector = SubResource("Resource_mxkdy")
+metadata/_custom_type_script = "uid://db0bm7f1kwscm"
+
+[sub_resource type="Resource" id="Resource_ywcgm"]
+script = ExtResource("2_gyuoe")
+effects = Array[ExtResource("4_wwdpq")]([SubResource("Resource_6wcib")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_bge0o")
+name = "Lost Citizen"
+type = "minion"
+rarity = "common"
+cost = 2
+description = "On Play: Summon a 2/1 'Eluin Ranger'."
+attack = 1
+health = 1
+triggered_effects = Array[ExtResource("2_gyuoe")]([SubResource("Resource_ywcgm")])
+art = "res://assets/minion_lost_citizen.png"

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://diusbg63v756y"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_wjndl"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_58sor"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_7lobb"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_htlgh"]
+[ext_resource type="Script" uid="uid://d2yx8vuo1gg1f" path="res://effects/add_cards.gd" id="5_dwsnh"]
+[ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="6_omfix"]
+
+[sub_resource type="Resource" id="Resource_58sor"]
+script = ExtResource("6_omfix")
+metadata/_custom_type_script = "uid://b22n7rtinuy3p"
+
+[sub_resource type="Resource" id="Resource_bb7jg"]
+script = ExtResource("5_dwsnh")
+card_pool = "Spells"
+amount = "1"
+target_selector = SubResource("Resource_58sor")
+metadata/_custom_type_script = "uid://d2yx8vuo1gg1f"
+
+[sub_resource type="Resource" id="Resource_wjndl"]
+script = ExtResource("2_58sor")
+effects = Array[ExtResource("4_htlgh")]([SubResource("Resource_bb7jg")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_wjndl")
+name = "Mystic Seer"
+type = "minion"
+minion_type = "Elf"
+rarity = "rare"
+cost = 3
+description = "On Play: Add a random spell to your hand."
+attack = 2
+health = 3
+triggered_effects = Array[ExtResource("2_58sor")]([SubResource("Resource_wjndl")])
+art = "res://assets/minion_mystic_seer.png"

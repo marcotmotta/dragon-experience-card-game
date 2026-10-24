@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://boflu7rqqtcq2"]
+
+[ext_resource type="Texture2D" uid="uid://5qk07gqrd12e" path="res://assets/card_outline.png" id="1_5cpm2"]
+[ext_resource type="Texture2D" uid="uid://cnlpj1rm8ciaq" path="res://assets/card_bronze.png" id="2_vj1kr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v30cq"]
+font_size = 14
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_do5ra"]
+font_size = 39
+outline_size = 7
+outline_color = Color(0, 0, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ubsfs"]
+font_size = 39
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ts7i5"]
+font_size = 39
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t45bj"]
+font_size = 13
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="UI" type="Control" unique_id=268782468]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Outline" type="Sprite2D" parent="." unique_id=1728264486]
+visible = false
+position = Vector2(7.033348e-06, -8.34465e-06)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1_5cpm2")
+
+[node name="CardArt" type="Sprite2D" parent="." unique_id=712876400]
+position = Vector2(0, -25.000002)
+scale = Vector2(1.4, 1.409)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2010023071]
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("2_vj1kr")
+
+[node name="CardName" type="Label" parent="." unique_id=1515931174]
+layout_mode = 0
+offset_left = -200.0
+offset_top = -115.0
+offset_right = 200.0
+offset_bottom = -90.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "CARD NAME "
+label_settings = SubResource("LabelSettings_v30cq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="." unique_id=1366162356]
+layout_mode = 0
+offset_left = -85.0
+offset_top = -151.0
+offset_right = -46.0
+offset_bottom = -106.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "10"
+label_settings = SubResource("LabelSettings_do5ra")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Attack" type="Label" parent="." unique_id=40738933]
+layout_mode = 0
+offset_left = -84.0
+offset_top = 100.0
+offset_right = -45.0
+offset_bottom = 145.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "10"
+label_settings = SubResource("LabelSettings_ubsfs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health" type="Label" parent="." unique_id=1893920717]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 100.0
+offset_right = 84.0
+offset_bottom = 145.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "10"
+label_settings = SubResource("LabelSettings_ts7i5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="." unique_id=1644449302]
+layout_mode = 0
+offset_left = -75.0
+offset_top = 56.0
+offset_right = 75.0
+offset_bottom = 109.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+bbcode_enabled = true
+text = "essa carta tem um efeito esparrado que se pa nem cabe aqui."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MinionType" type="Label" parent="." unique_id=755626026]
+layout_mode = 0
+offset_left = -104.0
+offset_top = 109.0
+offset_right = 104.0
+offset_bottom = 137.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Undead"
+label_settings = SubResource("LabelSettings_t45bj")
+horizontal_alignment = 1
+vertical_alignment = 1

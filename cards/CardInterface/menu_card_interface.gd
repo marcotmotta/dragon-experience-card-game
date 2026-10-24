@@ -29,9 +29,11 @@ func _ready():
 	var bold_keywords = [
 		'On Play',
 		'On Death',
+		'On Attack',
 		'End of Turn',
 		'Start of Turn',
-		'Protection',
+		'Resilient',
+		'Sentinel',
 	]
 
 	for keyword in bold_keywords:
@@ -39,6 +41,13 @@ func _ready():
 		description = description.replace(keyword, bold_keyword)
 
 	$UI/Description.text = description
+
+	if description.length() > 68:
+		$UI/Description.set("theme_override_font_sizes/normal_font_size", 11)
+		$UI/Description.set("theme_override_font_sizes/bold_font_size", 11)
+		$UI/Description.set("theme_override_font_sizes/bold_italics_font_size", 11)
+		$UI/Description.set("theme_override_font_sizes/italics_font_size", 11)
+		$UI/Description.set("theme_override_font_sizes/mono_font_size", 11)
 
 	if type == 'minion':
 		$UI/Attack.text = str(attack)
@@ -61,5 +70,3 @@ func _ready():
 			$UI/Sprite2D.texture = card_silver_scene
 		'common':
 			$UI/Sprite2D.texture = card_bronze_scene
-
-	#scale = Vector2(0.75, 0.75)

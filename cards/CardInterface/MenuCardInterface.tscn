@@ -1,128 +1,15 @@
 [gd_scene format=3 uid="uid://cl57somqq0iyg"]
 
 [ext_resource type="Script" uid="uid://cei7hjg6fqhxg" path="res://cards/CardInterface/menu_card_interface.gd" id="1_v30cq"]
-[ext_resource type="Texture2D" uid="uid://5qk07gqrd12e" path="res://assets/card_outline.png" id="2_opimj"]
-[ext_resource type="Texture2D" uid="uid://cnlpj1rm8ciaq" path="res://assets/card_bronze.png" id="3_lkxjv"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_v30cq"]
-font_size = 20
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_do5ra"]
-font_size = 45
-outline_size = 10
-outline_color = Color(0, 0, 1, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ubsfs"]
-font_size = 45
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ts7i5"]
-font_size = 45
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_t45bj"]
-font_size = 18
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="PackedScene" uid="uid://boflu7rqqtcq2" path="res://cards/CardInterface/CardInterfaceUI.tscn" id="2_u4q8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvsbi"]
-size = Vector2(240, 388)
+size = Vector2(168, 271.6)
 
 [node name="MenuCardInterface" type="Area2D" unique_id=599086336 groups=["card"]]
-scale = Vector2(0.7, 0.7)
 script = ExtResource("1_v30cq")
 
-[node name="UI" type="Control" parent="." unique_id=1056136867 groups=["card"]]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Outline" type="Sprite2D" parent="UI" unique_id=330309106]
-visible = false
-position = Vector2(7.033348e-06, -8.34465e-06)
-scale = Vector2(2, 2)
-texture = ExtResource("2_opimj")
-
-[node name="CardArt" type="Sprite2D" parent="UI" unique_id=855808226]
-position = Vector2(0, -36)
-scale = Vector2(2, 2)
-
-[node name="Sprite2D" type="Sprite2D" parent="UI" unique_id=1057167588]
-scale = Vector2(2, 2)
-texture = ExtResource("3_lkxjv")
-
-[node name="CardName" type="Label" parent="UI" unique_id=695615599]
-layout_mode = 0
-offset_left = -199.99998
-offset_top = -162.99998
-offset_right = 200.00002
-offset_bottom = -134.99998
-pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "CARD NAME "
-label_settings = SubResource("LabelSettings_v30cq")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Cost" type="Label" parent="UI" unique_id=862348980]
-layout_mode = 0
-offset_left = -122.0
-offset_top = -208.0
-offset_right = -71.0
-offset_bottom = -145.0
-text = "10"
-label_settings = SubResource("LabelSettings_do5ra")
-horizontal_alignment = 1
-
-[node name="Attack" type="Label" parent="UI" unique_id=514200973]
-layout_mode = 0
-offset_left = -122.0
-offset_top = 140.0
-offset_right = -71.0
-offset_bottom = 203.0
-text = "10"
-label_settings = SubResource("LabelSettings_ubsfs")
-horizontal_alignment = 1
-
-[node name="Health" type="Label" parent="UI" unique_id=1588570583]
-layout_mode = 0
-offset_left = 67.0
-offset_top = 143.0
-offset_right = 118.0
-offset_bottom = 206.0
-text = "10"
-label_settings = SubResource("LabelSettings_ts7i5")
-horizontal_alignment = 1
-
-[node name="Description" type="RichTextLabel" parent="UI" unique_id=461955032]
-layout_mode = 0
-offset_left = -107.00001
-offset_top = 80.0
-offset_right = 107.99999
-offset_bottom = 160.0
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-bbcode_enabled = true
-text = "essa carta tem um efeito esparrado que se pa nem cabe aqui."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MinionType" type="Label" parent="UI" unique_id=1010317742]
-layout_mode = 0
-offset_left = -104.0
-offset_top = 161.0
-offset_right = 104.0
-offset_bottom = 189.0
-text = "Undead"
-label_settings = SubResource("LabelSettings_t45bj")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="UI" parent="." unique_id=268782468 instance=ExtResource("2_u4q8b")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1868807544]
 visible = false

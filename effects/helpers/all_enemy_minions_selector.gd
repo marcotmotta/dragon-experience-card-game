@@ -1,13 +1,12 @@
 extends TargetSelector
 class_name AllEnemyMinionsSelector
 
-func get_targets(source, initial_target, source_owner, ally_char = null, enemy_char = null, ally_board = null, enemy_board = null):
+func get_targets_state(state, source, source_seat: int, initial_target = null, rng: RandomNumberGenerator = null) -> Array:
 	var enemies = []
+	var opponent_seat = state.opponent_of(source_seat)
 
-	for pos in enemy_board.get_children():
-		if pos.get_children():
-			var enemy = pos.get_child(0)
-			if (not conditional_target_type) or (enemy.type == conditional_target_type):
-				enemies.append(enemy)
+	for minion in state.players[opponent_seat].board:
+		if minion != null and ((not conditional_target_type) or minion.minion_type == conditional_target_type):
+			enemies.append(minion)
 
 	return enemies

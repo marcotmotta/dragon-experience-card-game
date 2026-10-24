@@ -3,8 +3,24 @@
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_ebfmu"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_pxo35"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_k1a7q"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_pxo35"]
 [ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="4_wpfu7"]
-[ext_resource type="Script" uid="uid://d0lrt347dvkow" path="res://effects/helpers/random_enemies_selector.gd" id="5_ebfmu"]
+[ext_resource type="Script" uid="uid://d0lrt347dvkow" path="res://effects/helpers/random_enemy_selector.gd" id="5_ebfmu"]
+
+[sub_resource type="Resource" id="Resource_wpfu7"]
+script = ExtResource("5_ebfmu")
+metadata/_custom_type_script = "uid://d0lrt347dvkow"
+
+[sub_resource type="Resource" id="Resource_uvv0c"]
+script = ExtResource("4_wpfu7")
+amount = 3
+target_selector = SubResource("Resource_wpfu7")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_o1ikf"]
+script = ExtResource("2_pxo35")
+effects = Array[ExtResource("3_k1a7q")]([SubResource("Resource_uvv0c")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
 
 [sub_resource type="Resource" id="Resource_pxo35"]
 script = ExtResource("5_ebfmu")
@@ -12,7 +28,7 @@ metadata/_custom_type_script = "uid://d0lrt347dvkow"
 
 [sub_resource type="Resource" id="Resource_k1a7q"]
 script = ExtResource("4_wpfu7")
-amount = 4
+amount = 3
 target_selector = SubResource("Resource_pxo35")
 metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
 
@@ -26,10 +42,10 @@ metadata/_custom_type_script = "uid://bbeal5odbm3db"
 script = ExtResource("1_ebfmu")
 name = "Forgio"
 type = "minion"
-rarity = "epic"
+rarity = "legendary"
 cost = 4
-description = "On Death: Deal 4 damage to a random enemy."
+description = "On Play and On Death: Deal 3 damage to a random enemy."
 attack = 4
 health = 4
-triggered_effects = Array[ExtResource("2_pxo35")]([SubResource("Resource_0it1a")])
+triggered_effects = Array[ExtResource("2_pxo35")]([SubResource("Resource_o1ikf"), SubResource("Resource_0it1a")])
 art = "res://assets/minion_forgio.png"

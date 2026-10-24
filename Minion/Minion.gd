@@ -1,56 +1,34 @@
 extends Area2D
 
-# TODO: this should be the players enum type?
+# View of a MinionInstance. Holds no game logic anymore (Task 4.6): it reads its
+# bound instance from the GameState and renders it; clicks are reported to the
+# controller which turns them into Actions.
+
+var entity_id: int = 0
 @export var minion_owner = 0
 var owner_node = null
-
-var minion_name
-var BASE_ATTACK = 2
-var BASE_HEALTH = 3
-var max_attack = 2
-var max_health = 3
-var current_attack
-var current_health
-var type = ''
-
-var attacked = true
-
-# aux for trigger queue
-var is_dead = false
-
 var main_scene
 
-# effects
-var triggered_effects = []
-
-# properties
-var properties = []
-
-# TODO: should i have a sileced_triggered_effects and silenced_properties ?
-# var is_silenced = false
-
 @onready var property_icon_scene = load("res://Minion/PropertyIcon.tscn")
-@onready var icon_protection = load("res://assets/icon_protection.png")
-
-# art
-var art
-
+@onready var icon_resilient = load("res://assets/icon_resilient.png")
+@onready var icon_sentinel = load("res://assets/icon_sentinel.png")
 @onready var line = $Line2D
 
-@onready var vfx_damage_scene = load("res://vfx/damage/damage.tscn")
+@onready var card_bronze_scene = load("res://assets/card_bronze.png")
+@onready var card_silver_scene = load("res://assets/card_silver.png")
+@onready var card_gold_scene = load("res://assets/card_gold.png")
+@onready var card_purple_scene = load("res://assets/card_purple.png")
+@onready var card_red_scene = load("res://assets/card_red.png")
 
-# audio sfx
-@onready var sound_player_scene = load("res://sound/SoundPlayer.tscn")
-@onready var hit_sound = load("res://sound/hit.wav")
-@onready var power_up_sound = load("res://sound/power_up.wav")
-@onready var heal_sound = load("res://sound/heal.wav")
+func _get_instance():
+	if main_scene == null or main_scene.game_state == null:
+		return null
+	return main_scene.game_state.entities.get(entity_id)
 
 func _ready():
-	# set values
-	max_attack = BASE_ATTACK
-	max_health = BASE_HEALTH
-	current_attack = BASE_ATTACK
-	current_health = BASE_HEALTH
+	var minion = _get_instance()
+	if minion == null:
+		return
 
 	var health_label_settings = $Health.label_settings.duplicate()
 	$Health.label_settings = health_label_settings
@@ -61,170 +39,146 @@ func _ready():
 	$EffectIcon.visible = false
 
 	# art
-	$MinionArt.texture = load(art)
+	var texture = load(minion.data.art)
+	$MinionArt.texture = texture
+	$CardInterfaceHover/UI/CardArt.texture = texture
 
-	# trigger on summon effects
-	for trigger in triggered_effects:
-		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_SUMMON:
-			for effect in trigger.effects:
-				var board1 = main_scene.board_of(owner_node.seat)
-				var board2 = main_scene.board_of(main_scene.opponent_of(owner_node.seat))
-				var char1 = main_scene.char_of(owner_node.seat)
-				var char2 = main_scene.char_of(main_scene.opponent_of(owner_node.seat))
-
-				var targets = effect.target_selector.get_targets(self, null, owner_node, char1, char2, board1, board2)
-
-				if targets:
-					for t in targets:
-						effect.execute(self, t)
-
-				else:
-					effect.execute(self, null)
+	# render immediately so a freshly-created node never shows scene-default stats
+	_render(minion)
 
 func _process(delta):
-	$MinionName.text = minion_name
-	$Attack.text = str(current_attack)
-	$Health.text = str(current_health)
+	var minion = _get_instance()
+	if minion == null:
+		return
 
-	$AttackedLabel.visible = not attacked
+	_render(minion)
 
-	if max_health > BASE_HEALTH:
-		if current_health == max_health:
+	# line
+	if main_scene.selected_source == self:
+		line.visible = true
+		line.points = [Vector2.ZERO, to_local(get_global_mouse_position())]
+	else:
+		line.visible = false
+
+func _render(minion):
+	$MinionName.text = minion.data.name
+	$Attack.text = str(minion.current_attack)
+	$Health.text = str(minion.current_health)
+
+	$Outline.visible = not minion.attacked
+	#$AttackedLabel.visible = not minion.attacked
+
+	if minion.max_health > minion.BASE_HEALTH:
+		if minion.current_health == minion.max_health:
 			$Health.label_settings.font_color = Color(0.0, 1.0, 0.0)
 		else:
 			$Health.label_settings.font_color = Color(1.0, 0.271, 0.271)
 	else:
-		if current_health == max_health:
+		if minion.current_health == minion.max_health:
 			$Health.label_settings.font_color = Color(1.0, 1.0, 1.0)
 		else:
 			$Health.label_settings.font_color = Color(1.0, 0.271, 0.271)
 
-	if current_attack > BASE_ATTACK:
+	if minion.current_attack > minion.BASE_ATTACK:
 		$Attack.label_settings.font_color = Color(0.0, 1.0, 0.0)
 	else:
 		$Attack.label_settings.font_color = Color(1.0, 1.0, 1.0)
 
 	# effect icons
-	for trigger in triggered_effects:
-		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_DEATH:
-			$OnDeathIcon.visible = true
-			break
-
-	for trigger in triggered_effects:
-		if (trigger.trigger_type == TriggeredEffect.TriggerType.ON_ATTACK) or \
-			(trigger.trigger_type == TriggeredEffect.TriggerType.ON_TURN_START) or \
-			(trigger.trigger_type == TriggeredEffect.TriggerType.ON_TURN_END):
-				$EffectIcon.visible = true
-				break
-
-	# line
-	if main_scene.selected_source == self:
-		line.visible = true
-		var start = Vector2.ZERO
-		var end = to_local(get_global_mouse_position())
-
-		line.points = [start, end]
-
-	else:
-		line.visible = false
-
-func get_health():
-	return {'total': max_health, 'current': current_health}
-
-func attack(target):
-	target.take_damage(current_attack)
-	if target.is_in_group('minion'):
-		take_damage(target.current_attack)
-
-	attacked = true
-
-func gain_property(property_name):
-	if property_name in properties:
-		# already have property
-		return false
-
-	properties.append(property_name)
-
-	var property_icon_instance = property_icon_scene.instantiate()
-
-	# ui icons
-	match property_name:
-		'Protection':
-			property_icon_instance.get_node('PropertyIcon').texture = icon_protection
-
-	$Properties.add_child(property_icon_instance)
-
-func gain_status(attack_amount, health_amount):
-	max_attack += attack_amount
-	max_health += health_amount
-	current_attack += attack_amount
-	current_health += health_amount
-
-	# play sfx
-	var sound_player_instance = sound_player_scene.instantiate()
-	sound_player_instance.stream = power_up_sound
-	main_scene.add_child(sound_player_instance)
-
-	if current_health <= 0:
-		die()
-
-func get_silenced():
-	triggered_effects = []
-	properties = []
-
-	if current_attack < BASE_ATTACK:
-		max_attack = BASE_ATTACK
-		current_attack = BASE_ATTACK
-
-	if current_health < BASE_HEALTH:
-		max_health = BASE_HEALTH
-		current_health = BASE_HEALTH
-
 	$OnDeathIcon.visible = false
 	$EffectIcon.visible = false
+	for trigger in minion.triggered_effects:
+		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_DEATH:
+			$OnDeathIcon.visible = true
+		if trigger.trigger_type == TriggeredEffect.TriggerType.ON_ATTACK or \
+			trigger.trigger_type == TriggeredEffect.TriggerType.ON_TAKING_DAMAGE or \
+			trigger.trigger_type == TriggeredEffect.TriggerType.ON_TURN_START or \
+			trigger.trigger_type == TriggeredEffect.TriggerType.ON_TURN_END:
+			$EffectIcon.visible = true
 
+	$SilenceIcon.visible = minion.silenced
+
+	# property icons
 	for p in $Properties.get_children():
 		p.queue_free()
 
-	# minion can gain effects later, but cant ever be de-silenced, so this is permanent
-	$SilenceIcon.visible = true
+	$SentinelOutline.visible = false
 
-func take_damage(dmg):
-	if 'Protection' in properties:
-		dmg = max(dmg - 1, 0)
+	$CardInterfaceHover/PropertiesDescriptions/ResilientDescription.visible = false
+	$CardInterfaceHover/PropertiesDescriptions/SentinelDescription.visible = false
 
-	current_health -= dmg
+	for property_name in minion.properties:
+		match property_name:
+			'Resilient':
+				$CardInterfaceHover/PropertiesDescriptions/ResilientDescription.visible = true
+				var property_icon_instance = property_icon_scene.instantiate()
+				property_icon_instance.get_node('PropertyIcon').texture = icon_resilient
+				$Properties.add_child(property_icon_instance)
+			'Sentinel':
+				$CardInterfaceHover/PropertiesDescriptions/SentinelDescription.visible = true
+				$SentinelOutline.visible = true
+				var property_icon_instance = property_icon_scene.instantiate()
+				property_icon_instance.get_node('PropertyIcon').texture = icon_sentinel
+				$Properties.add_child(property_icon_instance)
 
-	# vfx damage
-	var vfx_damage_instance = vfx_damage_scene.instantiate()
-	vfx_damage_instance.global_position = global_position
-	vfx_damage_instance.emitting = true
-	main_scene.add_child(vfx_damage_instance)
+	# Associated Card Interface UI
+	$CardInterfaceHover/UI/CardName.text = minion.data.name
+	$CardInterfaceHover/UI/Cost.text = str(minion.data.cost)
+	$CardInterfaceHover/UI/MinionType.text = minion.data.minion_type
 
-	# play sfx
-	var sound_player_instance = sound_player_scene.instantiate()
-	sound_player_instance.stream = hit_sound
-	main_scene.add_child(sound_player_instance)
+	var bold_keywords = [
+		'On Play',
+		'On Death',
+		'On Attack',
+		'End of Turn',
+		'Start of Turn',
+		'Resilient',
+		'Sentinel',
+	]
+	
+	var description = minion.data.description
 
-	if current_health <= 0:
-		die()
+	for keyword in bold_keywords:
+		var bold_keyword = "[b]" + keyword + "[/b]"
+		description = description.replace(keyword, bold_keyword)
 
-func heal(amount):
-	current_health = min(current_health + amount, max_health)
+	$CardInterfaceHover/UI/Description.text = description
 
-	# play sfx
-	var sound_player_instance = sound_player_scene.instantiate()
-	sound_player_instance.stream = heal_sound
-	main_scene.add_child(sound_player_instance)
+	if minion.data.type == 'minion':
+		$CardInterfaceHover/UI/Attack.text = str(minion.data.attack)
+		$CardInterfaceHover/UI/Health.text = str(minion.data.health)
+	else:
+		$CardInterfaceHover/UI/Attack.text = ''
+		$CardInterfaceHover/UI/Health.text = ''
 
-func die():
-	is_dead = true
+	match minion.data.rarity:
+		'legendary':
+			$CardInterfaceHover/UI/Sprite2D.texture = card_red_scene
+		'epic':
+			$CardInterfaceHover/UI/Sprite2D.texture = card_purple_scene
+		'rare':
+			$CardInterfaceHover/UI/Sprite2D.texture = card_gold_scene
+		'uncommon':
+			$CardInterfaceHover/UI/Sprite2D.texture = card_silver_scene
+		'common':
+			$CardInterfaceHover/UI/Sprite2D.texture = card_bronze_scene
+
+# attack lunge: dash toward the target and back. awaited by the presenter.
+func play_attack_anim(target_node) -> void:
+	var home = global_position
+	var toward = home + (target_node.global_position - home) * 0.6
+	var tween = create_tween()
+	tween.tween_property(self, 'global_position', toward, 0.12)
+	tween.tween_property(self, 'global_position', home, 0.12)
+	await tween.finished
 
 func _on_mouse_entered():
-	$Outline.visible = true
+	$Outline.modulate = '#ff00ff'
+	$CardInterfaceHover.visible = true
 
 func _on_mouse_exited():
-	$Outline.visible = false
+	$Outline.modulate = '#ffffff'
+	$CardInterfaceHover.visible = false
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and Input.is_action_just_pressed('mouse1'):

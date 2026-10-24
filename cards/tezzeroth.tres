@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bgvuhun36tjj4"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_enjkb"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_fuam8"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_p76y7"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_oig7w"]
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="5_4a8ep"]
+[ext_resource type="Script" uid="uid://d0lrt347dvkow" path="res://effects/helpers/random_enemy_selector.gd" id="6_enjkb"]
+
+[sub_resource type="Resource" id="Resource_fuam8"]
+script = ExtResource("6_enjkb")
+metadata/_custom_type_script = "uid://d0lrt347dvkow"
+
+[sub_resource type="Resource" id="Resource_enjkb"]
+script = ExtResource("5_4a8ep")
+target_selector = SubResource("Resource_fuam8")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_p76y7"]
+script = ExtResource("6_enjkb")
+metadata/_custom_type_script = "uid://d0lrt347dvkow"
+
+[sub_resource type="Resource" id="Resource_oig7w"]
+script = ExtResource("5_4a8ep")
+target_selector = SubResource("Resource_p76y7")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_yf0wt"]
+script = ExtResource("6_enjkb")
+metadata/_custom_type_script = "uid://d0lrt347dvkow"
+
+[sub_resource type="Resource" id="Resource_psvuk"]
+script = ExtResource("5_4a8ep")
+target_selector = SubResource("Resource_yf0wt")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_mqq60"]
+script = ExtResource("6_enjkb")
+metadata/_custom_type_script = "uid://d0lrt347dvkow"
+
+[sub_resource type="Resource" id="Resource_lgk8a"]
+script = ExtResource("5_4a8ep")
+target_selector = SubResource("Resource_mqq60")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_c0omw"]
+script = ExtResource("6_enjkb")
+metadata/_custom_type_script = "uid://d0lrt347dvkow"
+
+[sub_resource type="Resource" id="Resource_qulgw"]
+script = ExtResource("5_4a8ep")
+target_selector = SubResource("Resource_c0omw")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_m06vt"]
+script = ExtResource("2_fuam8")
+effects = Array[ExtResource("4_oig7w")]([SubResource("Resource_enjkb"), SubResource("Resource_oig7w"), SubResource("Resource_psvuk"), SubResource("Resource_lgk8a"), SubResource("Resource_qulgw")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_enjkb")
+name = "Tezzeroth"
+type = "minion"
+minion_type = "Dragon"
+rarity = "epic"
+cost = 8
+description = "On Play: Deal 5 damage randomly split among all enemies."
+attack = 8
+health = 8
+triggered_effects = Array[ExtResource("2_fuam8")]([SubResource("Resource_m06vt")])
+art = "res://assets/minion_tezzeroth.png"

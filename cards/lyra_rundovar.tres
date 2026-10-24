@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_c3ki1"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_tfcbf"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_tfcbf"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_vncmv"]
 [ext_resource type="Script" uid="uid://db0bm7f1kwscm" path="res://effects/summon_minion.gd" id="4_3w0pu"]
 [ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_vac2q"]
@@ -30,7 +31,7 @@ minion_type = "Undead"
 rarity = "legendary"
 cost = 6
 description = "End of Turn: Summon a 1/2 'Skeleton'."
-attack = 4
+attack = 5
 health = 5
 triggered_effects = Array[ExtResource("2_tfcbf")]([SubResource("Resource_m06vt")])
 art = "res://assets/minion_lyra_rundovar.png"

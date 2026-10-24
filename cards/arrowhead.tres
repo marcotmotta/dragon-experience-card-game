@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="2_rolo8"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_t11nr"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_3d64q"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_moxl4"]
 [ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="5_moxl4"]
 
 [sub_resource type="Resource" id="Resource_nqoiu"]

@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_116n2"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_u82eb"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_13f3g"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_bcia6"]
 [ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="4_13f3g"]
-[ext_resource type="Script" uid="uid://bkyhvt1p2hvgj" path="res://effects/helpers/all_enemy_selector.gd" id="5_13f3g"]
+[ext_resource type="Script" uid="uid://bkyhvt1p2hvgj" path="res://effects/helpers/all_enemies_selector.gd" id="6_bcia6"]
 
 [sub_resource type="Resource" id="Resource_ergl3"]
-script = ExtResource("5_13f3g")
+script = ExtResource("6_bcia6")
 metadata/_custom_type_script = "uid://bkyhvt1p2hvgj"
 
 [sub_resource type="Resource" id="Resource_bcia6"]

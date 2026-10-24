@@ -3,18 +3,16 @@ class_name Effect
 
 @export var target_selector: TargetSelector
 
-# validate simply if the card can be played (has available targets)
-#
-# returns:
-# [true: bool, list of possible targets: []
-#
-func validate_possible_play(source_owner, ally_char, enemy_char, ally_board = null, enemy_board = null, is_cpu = false) -> Array:
+# State-based interface: operates on the GameState via the Resolver and on instances
+# (MinionInstance / PlayerState) rather than nodes.
+
+# [has_any_target: bool, targets: Array of instances]
+func validate_possible_play_state(state, source_seat, is_cpu = false) -> Array:
 	return [true, []]
 
-# validate if selected target is valid
-func validate_play(target = null):
+func validate_play_state(target = null) -> bool:
 	return true
 
-# assume target is already validated
-func execute(source, target = null):
+# `resolver` gives access to state + rng + lifecycle helpers (spawn/draw/add_card).
+func execute_state(resolver, source, target = null) -> void:
 	pass

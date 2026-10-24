@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_l02yt"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_h03jo"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_h03jo"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_jmejh"]
 [ext_resource type="Script" uid="uid://vvw6y54vsmbk" path="res://effects/silence.gd" id="4_a630u"]
 [ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="5_jmejh"]
 
@@ -27,8 +28,9 @@ type = "minion"
 rarity = "common"
 cost = 2
 description = "On Play: Silence a minion."
-requires_target = true
 attack = 1
 health = 2
+requires_target = true
+target_optional = true
 triggered_effects = Array[ExtResource("2_h03jo")]([SubResource("Resource_l5rcl")])
 art = "res://assets/minion_cleric_apprentice.png"

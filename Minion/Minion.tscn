@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://cvmcu5qfjw3f5"]
 
-[ext_resource type="Texture2D" uid="uid://c1yamtlv5hsnk" path="res://icon.svg" id="1_j1yq0"]
 [ext_resource type="Script" uid="uid://dot053d0v6gfx" path="res://Minion/Minion.gd" id="1_xkbak"]
+[ext_resource type="Texture2D" uid="uid://d3qsccwc8dv7c" path="res://assets/minion_outline_blue.png" id="2_22oc7"]
 [ext_resource type="Texture2D" uid="uid://t6gapq5k25uo" path="res://assets/minion_zombie.png" id="3_eui0b"]
 [ext_resource type="PackedScene" uid="uid://c8hm2otkex7en" path="res://vfx/damage/damage.tscn" id="3_pxngv"]
 [ext_resource type="Texture2D" uid="uid://cylabtproduga" path="res://assets/attack_icon.png" id="4_kwss7"]
 [ext_resource type="Texture2D" uid="uid://c5p4dkqkinrft" path="res://assets/death_icon.png" id="4_ncqbn"]
+[ext_resource type="Texture2D" uid="uid://cfada4gdwq1xi" path="res://assets/minion_outline_sentinel.png" id="4_qperv"]
 [ext_resource type="Texture2D" uid="uid://bs2qle0rhrc6c" path="res://assets/effect_icon.png" id="5_mbwdj"]
 [ext_resource type="Texture2D" uid="uid://ccw0vyl8xpmgl" path="res://assets/icon_silence.png" id="6_o8jr0"]
+[ext_resource type="PackedScene" uid="uid://boflu7rqqtcq2" path="res://cards/CardInterface/CardInterfaceUI.tscn" id="9_22oc7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eui0b"]
 font_size = 12
@@ -31,18 +33,34 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0kv6k"]
 size = Vector2(126, 90)
 
+[sub_resource type="LabelSettings" id="LabelSettings_qperv"]
+font_size = 12
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sjf0a"]
+font_size = 12
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Minion" type="Area2D" unique_id=506011199 groups=["minion"]]
 script = ExtResource("1_xkbak")
 
 [node name="Outline" type="Sprite2D" parent="." unique_id=768910256]
-visible = false
-modulate = Color(0, 1, 0, 1)
-position = Vector2(-3.5464764e-06, -0.50000095)
-scale = Vector2(1.078125, 0.7890625)
-texture = ExtResource("1_j1yq0")
+texture = ExtResource("2_22oc7")
 
 [node name="MinionArt" type="Sprite2D" parent="." unique_id=1037136466]
 texture = ExtResource("3_eui0b")
+
+[node name="SentinelOutline" type="Sprite2D" parent="." unique_id=1323274716]
+visible = false
+texture = ExtResource("4_qperv")
+
+[node name="SilenceIcon" type="Sprite2D" parent="." unique_id=278337235]
+visible = false
+position = Vector2(0, 45)
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("6_o8jr0")
 
 [node name="OnDeathIcon" type="Sprite2D" parent="." unique_id=795831954]
 visible = false
@@ -56,13 +74,8 @@ position = Vector2(0, 45)
 scale = Vector2(0.86, 0.86)
 texture = ExtResource("5_mbwdj")
 
-[node name="SilenceIcon" type="Sprite2D" parent="." unique_id=278337235]
-visible = false
-position = Vector2(0, 45)
-scale = Vector2(0.86, 0.86)
-texture = ExtResource("6_o8jr0")
-
 [node name="AttackedLabel" type="Sprite2D" parent="." unique_id=1070390850]
+visible = false
 position = Vector2(62, -15)
 texture = ExtResource("4_kwss7")
 
@@ -138,6 +151,65 @@ width_curve = SubResource("Curve_0swjs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1836576460]
 visible = false
 shape = SubResource("RectangleShape2D_0kv6k")
+
+[node name="CardInterfaceHover" type="Marker2D" parent="." unique_id=2082253776]
+visible = false
+position = Vector2(170, 0)
+
+[node name="UI" parent="CardInterfaceHover" unique_id=268782468 instance=ExtResource("9_22oc7")]
+z_index = 10
+
+[node name="PropertiesDescriptions" type="VBoxContainer" parent="CardInterfaceHover" unique_id=1706429238]
+offset_left = 100.0
+offset_top = -114.0
+offset_right = 100.0
+offset_bottom = -14.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="ResilientDescription" type="Control" parent="CardInterfaceHover/PropertiesDescriptions" unique_id=157279152]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CardInterfaceHover/PropertiesDescriptions/ResilientDescription" unique_id=1105812306]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 123.0
+offset_bottom = 39.0
+text = "Resilient:
+Takes 1 less damage."
+label_settings = SubResource("LabelSettings_qperv")
+
+[node name="ColorRect" type="ColorRect" parent="CardInterfaceHover/PropertiesDescriptions/ResilientDescription/Label" unique_id=2135488466]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -5.0
+offset_top = -2.0
+offset_right = 130.0
+offset_bottom = 37.0
+color = Color(0.03, 0.03, 0.03, 0.8627451)
+
+[node name="SentinelDescription" type="Control" parent="CardInterfaceHover/PropertiesDescriptions" unique_id=562488155]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CardInterfaceHover/PropertiesDescriptions/SentinelDescription" unique_id=1672171035]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 123.0
+offset_bottom = 58.0
+text = "Sentinel:
+Enemies must attack
+this minion first."
+label_settings = SubResource("LabelSettings_sjf0a")
+
+[node name="ColorRect" type="ColorRect" parent="CardInterfaceHover/PropertiesDescriptions/SentinelDescription/Label" unique_id=807455533]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -5.0
+offset_top = -2.0
+offset_right = 130.0
+offset_bottom = 56.0
+color = Color(0.03137255, 0.03137255, 0.03137255, 0.8627451)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

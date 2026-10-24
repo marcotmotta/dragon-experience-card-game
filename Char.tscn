@@ -19,10 +19,10 @@ script = ExtResource("1_8q27n")
 texture = ExtResource("1_20esp")
 
 [node name="Health" type="Label" parent="." unique_id=1614978548]
-offset_left = -61.666626
-offset_top = 26.666687
-offset_right = 63.333374
-offset_bottom = 96.66669
+offset_left = -61.667
+offset_top = 20.0
+offset_right = 63.333
+offset_bottom = 90.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "00"
 label_settings = SubResource("LabelSettings_fos0i")

@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bfn46gpjk5ess"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_vrfl0"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_8lscc"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_0kio1"]
+[ext_resource type="Script" uid="uid://cp48djg5h3a12" path="res://effects/helpers/conditions/has_minion_type_condition.gd" id="4_8d17n"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="5_tcg44"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="6_vyo6l"]
+[ext_resource type="Script" uid="uid://odbgxfoby0hg" path="res://effects/helpers/self_target_selector.gd" id="7_ujhu7"]
+
+[sub_resource type="Resource" id="Resource_gqhl2"]
+script = ExtResource("4_8d17n")
+minion_type = "Elf"
+metadata/_custom_type_script = "uid://cp48djg5h3a12"
+
+[sub_resource type="Resource" id="Resource_i6mni"]
+script = ExtResource("7_ujhu7")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_oy55f"]
+script = ExtResource("6_vyo6l")
+attack_amount = 3
+target_selector = SubResource("Resource_i6mni")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_m5pt1"]
+script = ExtResource("2_8lscc")
+trigger_type = 2
+conditions = Array[ExtResource("3_0kio1")]([SubResource("Resource_gqhl2")])
+effects = Array[ExtResource("5_tcg44")]([SubResource("Resource_oy55f")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_vrfl0")
+name = "Sneaky Intruder"
+type = "minion"
+minion_type = "Elf"
+rarity = "uncommon"
+cost = 2
+description = "On Play: If you control another Elf, gain +3 attack."
+attack = 1
+health = 2
+triggered_effects = Array[ExtResource("2_8lscc")]([SubResource("Resource_m5pt1")])
+art = "res://assets/minion_sneaky_intruder.png"

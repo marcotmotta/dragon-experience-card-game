@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://tmy4yanxsasr"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_8yymn"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_unmos"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_cwali"]
+[ext_resource type="Script" uid="uid://cp48djg5h3a12" path="res://effects/helpers/conditions/has_minion_type_condition.gd" id="4_pi1gf"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="5_riodx"]
+[ext_resource type="Script" uid="uid://bwgog4txy7667" path="res://effects/give_status.gd" id="6_oy3rj"]
+[ext_resource type="Script" uid="uid://odbgxfoby0hg" path="res://effects/helpers/self_target_selector.gd" id="7_cjs5j"]
+[ext_resource type="Script" uid="uid://pl65ussys7p4" path="res://effects/give_property.gd" id="8_my1iv"]
+
+[sub_resource type="Resource" id="Resource_oy3rj"]
+script = ExtResource("4_pi1gf")
+minion_type = "Elf"
+metadata/_custom_type_script = "uid://cp48djg5h3a12"
+
+[sub_resource type="Resource" id="Resource_78odl"]
+script = ExtResource("7_cjs5j")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_kpipo"]
+script = ExtResource("6_oy3rj")
+health_amount = 2
+target_selector = SubResource("Resource_78odl")
+metadata/_custom_type_script = "uid://bwgog4txy7667"
+
+[sub_resource type="Resource" id="Resource_hknnt"]
+script = ExtResource("7_cjs5j")
+metadata/_custom_type_script = "uid://odbgxfoby0hg"
+
+[sub_resource type="Resource" id="Resource_attt4"]
+script = ExtResource("8_my1iv")
+given_property = "Sentinel"
+target_selector = SubResource("Resource_hknnt")
+metadata/_custom_type_script = "uid://pl65ussys7p4"
+
+[sub_resource type="Resource" id="Resource_cjs5j"]
+script = ExtResource("2_unmos")
+trigger_type = 2
+conditions = Array[ExtResource("3_cwali")]([SubResource("Resource_oy3rj")])
+effects = Array[ExtResource("5_riodx")]([SubResource("Resource_kpipo"), SubResource("Resource_attt4")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_8yymn")
+name = "Selfless Raider"
+type = "minion"
+minion_type = "Elf"
+rarity = "rare"
+cost = 3
+description = "On Play: If you control another Elf, gain +2 health and Sentinel."
+attack = 3
+health = 2
+triggered_effects = Array[ExtResource("2_unmos")]([SubResource("Resource_cjs5j")])
+art = "res://assets/minion_selfless_raider.png"

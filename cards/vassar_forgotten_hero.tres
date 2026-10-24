@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://coxmia0m3q3x2"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_64euj"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_1bjlh"]
+
+[resource]
+script = ExtResource("1_64euj")
+name = "Vassar, Forgotten Hero"
+type = "minion"
+minion_type = "Fiend"
+rarity = "legendary"
+cost = 6
+attack = 6
+health = 6
+art = "res://assets/minion_vassar_forgotten_hero.png"

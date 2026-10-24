@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_5m3eo"]
 [ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_mt2we"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_2psru"]
 [ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_m3tsq"]
 [ext_resource type="Script" uid="uid://d2yx8vuo1gg1f" path="res://effects/add_cards.gd" id="4_ctesi"]
 [ext_resource type="Script" uid="uid://b22n7rtinuy3p" path="res://effects/helpers/target_selector.gd" id="5_ctesi"]
@@ -12,7 +13,7 @@ metadata/_custom_type_script = "uid://b22n7rtinuy3p"
 
 [sub_resource type="Resource" id="Resource_2psru"]
 script = ExtResource("4_ctesi")
-card = "Health Potion"
+card = "Healing Potion"
 amount = "1"
 target_selector = SubResource("Resource_61leu")
 metadata/_custom_type_script = "uid://d2yx8vuo1gg1f"
@@ -29,8 +30,8 @@ type = "minion"
 minion_type = "Elf"
 rarity = "common"
 cost = 3
-description = "On Play: Add a 'Health Potion' to your hand."
-attack = 1
-health = 5
+description = "On Play: Add a 'Healing Potion' to your hand."
+attack = 2
+health = 4
 triggered_effects = Array[ExtResource("2_mt2we")]([SubResource("Resource_3j0st")])
 art = "res://assets/minion_apothecary.png"

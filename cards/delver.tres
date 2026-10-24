@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cur07e5c5nico"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_65gi3"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_5ec5w"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_5ip65"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_obj38"]
+[ext_resource type="Script" uid="uid://disc5lkyy31mb" path="res://effects/destroy_minion.gd" id="5_5h3cx"]
+[ext_resource type="Script" uid="uid://cnhprym5o5gbu" path="res://effects/helpers/random_enemy_minion_selector.gd" id="6_65gi3"]
+
+[sub_resource type="Resource" id="Resource_5ip65"]
+script = ExtResource("6_65gi3")
+metadata/_custom_type_script = "uid://cnhprym5o5gbu"
+
+[sub_resource type="Resource" id="Resource_65gi3"]
+script = ExtResource("5_5h3cx")
+target_selector = SubResource("Resource_5ip65")
+metadata/_custom_type_script = "uid://disc5lkyy31mb"
+
+[sub_resource type="Resource" id="Resource_5ec5w"]
+script = ExtResource("2_5ec5w")
+effects = Array[ExtResource("4_obj38")]([SubResource("Resource_65gi3")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_65gi3")
+name = "Delver"
+type = "minion"
+minion_type = "Dwarf"
+rarity = "legendary"
+cost = 7
+description = "On Play: Destroy a random enemy minion."
+attack = 7
+health = 5
+triggered_effects = Array[ExtResource("2_5ec5w")]([SubResource("Resource_5ec5w")])
+art = "res://assets/minion_delver.png"

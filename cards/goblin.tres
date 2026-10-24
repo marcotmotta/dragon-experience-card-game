@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://m8tsfvqb8p0j"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_lfkts"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_4aopx"]
+
+[resource]
+script = ExtResource("1_lfkts")
+name = "Goblin"
+type = "minion"
+rarity = "common"
+attack = 1
+health = 1
+art = "res://assets/minion_goblin.png"

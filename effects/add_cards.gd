@@ -1,11 +1,16 @@
 extends Effect
 class_name AddCardsEffect
 
-@export var card: String
+@export var card: String = '' # add specific card (by name) or random card of chosen pool. they are mutually exclusive
+@export var card_pool: String = ''
 @export var amount: String
 
-func execute(source, target = null):
-	var player = source.card_owner if 'card_owner' in source else source.minion_owner
+func execute_state(resolver, source, target = null) -> void:
+	if card:
+		for i in amount:
+			resolver.add_card(source.owner, card)
 
-	for i in amount:
-		source.main_scene.create_card(player, card)
+	# else, choose from pool
+	else:
+		for i in amount:
+			resolver.add_card(source.owner, Globals.card_pools[card_pool].pick_random())

@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bdh2ibwww1sqi"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_k36gq"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_g3vyd"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_ttcpt"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_5q083"]
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="5_d8i0q"]
+[ext_resource type="Script" uid="uid://djvr2hy7gv1ua" path="res://effects/helpers/all_minions_selector.gd" id="6_k36gq"]
+
+[sub_resource type="Resource" id="Resource_ttcpt"]
+script = ExtResource("6_k36gq")
+metadata/_custom_type_script = "uid://djvr2hy7gv1ua"
+
+[sub_resource type="Resource" id="Resource_k36gq"]
+script = ExtResource("5_d8i0q")
+target_selector = SubResource("Resource_ttcpt")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_5q083"]
+script = ExtResource("6_k36gq")
+metadata/_custom_type_script = "uid://djvr2hy7gv1ua"
+
+[sub_resource type="Resource" id="Resource_saxom"]
+script = ExtResource("5_d8i0q")
+target_selector = SubResource("Resource_5q083")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_g3vyd"]
+script = ExtResource("2_g3vyd")
+effects = Array[ExtResource("4_5q083")]([SubResource("Resource_k36gq"), SubResource("Resource_saxom")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_k36gq")
+name = "Ring of Fire"
+type = "spell"
+rarity = "common"
+cost = 2
+description = "Deal 1 damage to all minions twice."
+triggered_effects = Array[ExtResource("2_g3vyd")]([SubResource("Resource_g3vyd")])
+art = "res://assets/art_ring_of_fire.png"

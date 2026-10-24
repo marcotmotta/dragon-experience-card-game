@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dos4hxlof3kry"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_trig"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_bmdr0"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="3_eff"]
+[ext_resource type="Script" uid="uid://cgntgtstats01" path="res://effects/gain_target_stats.gd" id="4_gain"]
+[ext_resource type="Script" uid="uid://disc5lkyy31mb" path="res://effects/destroy_minion.gd" id="5_destroy"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="6_sel"]
+[ext_resource type="Script" uid="uid://btgtrstrcn001" path="res://effects/helpers/target_restriction.gd" id="7_restr"]
+
+[sub_resource type="Resource" id="Restriction"]
+script = ExtResource("7_restr")
+side = 1
+metadata/_custom_type_script = "uid://btgtrstrcn001"
+
+[sub_resource type="Resource" id="SelGain"]
+script = ExtResource("6_sel")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Gain"]
+script = ExtResource("4_gain")
+target_selector = SubResource("SelGain")
+metadata/_custom_type_script = "uid://cgntgtstats01"
+
+[sub_resource type="Resource" id="SelDestroy"]
+script = ExtResource("6_sel")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Destroy"]
+script = ExtResource("5_destroy")
+target_selector = SubResource("SelDestroy")
+metadata/_custom_type_script = "uid://disc5lkyy31mb"
+
+[sub_resource type="Resource" id="Trigger"]
+script = ExtResource("2_trig")
+effects = Array[ExtResource("3_eff")]([SubResource("Gain"), SubResource("Destroy")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_card")
+name = "Bloated Corpse"
+type = "minion"
+minion_type = "Undead"
+rarity = "rare"
+cost = 5
+description = "On Play: Destroy an ally minion and gain its stats."
+attack = 3
+health = 3
+requires_target = true
+target_restriction = SubResource("Restriction")
+triggered_effects = Array[ExtResource("2_trig")]([SubResource("Trigger")])
+art = "res://assets/minion_bloated_corpse.png"

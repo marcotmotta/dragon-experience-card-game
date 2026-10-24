@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7w0ow81sjou1"
-path="res://.godot/imported/icon_protection.png-f0286693c4a8e7bb3ae1d6469a3cddc5.ctex"
+uid="uid://bk5qsifj2rabl"
+path="res://.godot/imported/art_unnarmed_strike.png-38257a2c1288610d1d2f15c58b37e34f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icon_protection.png"
-dest_files=["res://.godot/imported/icon_protection.png-f0286693c4a8e7bb3ae1d6469a3cddc5.ctex"]
+source_file="res://assets/art_unnarmed_strike.png"
+dest_files=["res://.godot/imported/art_unnarmed_strike.png-38257a2c1288610d1d2f15c58b37e34f.ctex"]
 
 [params]
 

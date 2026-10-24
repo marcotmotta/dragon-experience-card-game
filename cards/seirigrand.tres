@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b7pp1ijesv3uu"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_yocrq"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_kwkik"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_4cmfe"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_yjllf"]
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="5_vre0g"]
+[ext_resource type="Script" uid="uid://dtbkfdufk31s6" path="res://effects/helpers/enemy_hero_selector.gd" id="6_kwkik"]
+
+[sub_resource type="Resource" id="Resource_4cmfe"]
+script = ExtResource("6_kwkik")
+metadata/_custom_type_script = "uid://dtbkfdufk31s6"
+
+[sub_resource type="Resource" id="Resource_xbrvk"]
+script = ExtResource("5_vre0g")
+amount = 2
+target_selector = SubResource("Resource_4cmfe")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_svkqm"]
+script = ExtResource("2_kwkik")
+trigger_type = 3
+effects = Array[ExtResource("4_yjllf")]([SubResource("Resource_xbrvk")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_yocrq")
+name = "Seirigrand"
+type = "minion"
+minion_type = "Dwarf"
+rarity = "epic"
+cost = 6
+description = "On Attack: Deal 2 damage to the enemy hero."
+attack = 5
+health = 6
+triggered_effects = Array[ExtResource("2_kwkik")]([SubResource("Resource_svkqm")])
+art = "res://assets/minion_seirigrand.png"

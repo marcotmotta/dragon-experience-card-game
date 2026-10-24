@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dngenmrgnqibv"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_vjfjw"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="3_ld8xf"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="4_5y070"]
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="5_eqric"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="5_slbno"]
+[ext_resource type="Script" uid="uid://djvr2hy7gv1ua" path="res://effects/helpers/all_minions_selector.gd" id="6_3tnsv"]
+
+[sub_resource type="Resource" id="Resource_vjfjw"]
+script = ExtResource("6_3tnsv")
+metadata/_custom_type_script = "uid://djvr2hy7gv1ua"
+
+[sub_resource type="Resource" id="Resource_xp1wb"]
+script = ExtResource("5_eqric")
+target_selector = SubResource("Resource_vjfjw")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_ld8xf"]
+script = ExtResource("3_ld8xf")
+trigger_type = 1
+effects = Array[ExtResource("5_slbno")]([SubResource("Resource_xp1wb")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_vjfjw")
+name = "Deep Devil"
+type = "minion"
+minion_type = "Fiend"
+rarity = "common"
+cost = 1
+description = "On Death: Deal 1 damage to all minions."
+attack = 1
+health = 1
+triggered_effects = Array[ExtResource("3_ld8xf")]([SubResource("Resource_ld8xf")])
+art = "res://assets/minion_deep_devil.png"

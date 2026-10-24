@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bxu7yq7hu6bmp"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_v0tyh"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_dxcpr"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_b38h1"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_dsos7"]
+[ext_resource type="Script" uid="uid://vvw6y54vsmbk" path="res://effects/silence.gd" id="5_dxcpr"]
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="5_vifcq"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="6_woilw"]
+
+[sub_resource type="Resource" id="Resource_b38h1"]
+script = ExtResource("6_woilw")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_dsos7"]
+script = ExtResource("5_dxcpr")
+target_selector = SubResource("Resource_b38h1")
+metadata/_custom_type_script = "uid://vvw6y54vsmbk"
+
+[sub_resource type="Resource" id="Resource_vifcq"]
+script = ExtResource("6_woilw")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_woilw"]
+script = ExtResource("5_vifcq")
+amount = 3
+target_selector = SubResource("Resource_vifcq")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_t11nr"]
+script = ExtResource("2_dxcpr")
+effects = Array[ExtResource("4_dsos7")]([SubResource("Resource_dsos7"), SubResource("Resource_woilw")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_v0tyh")
+name = "Staff of the Blinding Light"
+type = "spell"
+rarity = "uncommon"
+cost = 3
+description = "Silence a minion and deal 3 damage to it."
+requires_target = true
+triggered_effects = Array[ExtResource("2_dxcpr")]([SubResource("Resource_t11nr")])
+art = "res://assets/art_staff_blinding_light.png"

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://criws612hdwxf"]
+
+[ext_resource type="Script" uid="uid://c17pqo310x0a" path="res://cards/card.gd" id="1_gls5c"]
+[ext_resource type="Script" uid="uid://bbeal5odbm3db" path="res://effects/helpers/triggered_effects.gd" id="2_10y2f"]
+[ext_resource type="Script" uid="uid://u2gclate33bc" path="res://effects/helpers/conditions/condition.gd" id="3_uni27"]
+[ext_resource type="Script" uid="uid://cge62upccrfq2" path="res://effects/helpers/effects.gd" id="4_u7hi8"]
+[ext_resource type="Script" uid="uid://b8qmxx3qgfy66" path="res://effects/deal_damage.gd" id="5_btux3"]
+[ext_resource type="Script" uid="uid://br5yvmwmep6ww" path="res://effects/helpers/single_target_selector.gd" id="6_t3cmp"]
+
+[sub_resource type="Resource" id="Resource_7nf0p"]
+script = ExtResource("6_t3cmp")
+metadata/_custom_type_script = "uid://br5yvmwmep6ww"
+
+[sub_resource type="Resource" id="Resource_r43ty"]
+script = ExtResource("5_btux3")
+amount = 4
+target_selector = SubResource("Resource_7nf0p")
+metadata/_custom_type_script = "uid://b8qmxx3qgfy66"
+
+[sub_resource type="Resource" id="Resource_551fv"]
+script = ExtResource("2_10y2f")
+effects = Array[ExtResource("4_u7hi8")]([SubResource("Resource_r43ty")])
+metadata/_custom_type_script = "uid://bbeal5odbm3db"
+
+[resource]
+script = ExtResource("1_gls5c")
+name = "Royal Archer"
+type = "minion"
+minion_type = "Elf"
+rarity = "uncommon"
+cost = 6
+description = "Deal 4 damage."
+attack = 6
+health = 5
+requires_target = true
+triggered_effects = Array[ExtResource("2_10y2f")]([SubResource("Resource_551fv")])
+art = "res://assets/minion_royal_archer.png"
